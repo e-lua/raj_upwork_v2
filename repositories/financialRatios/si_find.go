@@ -1,6 +1,8 @@
 package all
 
 import (
+	"strconv"
+
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
@@ -62,8 +64,8 @@ func Si_Find_Annual(symbol string, limit int) ([]models.FinancialRatio_Annual, e
     priceSalesRatio,
     dividendYield,
     enterpriseValueMultiple,
-    priceFairValue FROM FinancialRatio_Annual WHERE symbol = ? LIMIT ?`
-	rows, error_show := db.Query(q, symbol, limit)
+    priceFairValue FROM FinancialRatio_Annual WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
+	rows, error_show := db.Query(q, symbol)
 
 	oListFRA := []models.FinancialRatio_Annual{}
 
@@ -195,7 +197,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.FinancialRatio_Quarter,
     priceSalesRatio,
     dividendYield,
     enterpriseValueMultiple,
-    priceFairValue FROM FinancialRatio_Quarter WHERE symbol = ? LIMIT ?`
+    priceFairValue FROM FinancialRatio_Quarter WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListFRQ := []models.FinancialRatio_Quarter{}
@@ -331,8 +333,8 @@ func Si_Find_AnnualTTM(symbol string, limit int) ([]models.FinancialRatio_Annual
     dividendYieldTTM,
     enterpriseValueMultipleTTM,
     priceFairValueTTM,
-    dividendPerShareTTM FROM FinancialRatio_AnnualTTM WHERE symbol = ? LIMIT ?`
-	rows, error_show := db.Query(q, symbol, limit)
+    dividendPerShareTTM FROM FinancialRatio_AnnualTTM WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
+	rows, error_show := db.Query(q, symbol)
 
 	oListFRATTM := []models.FinancialRatio_AnnualTTM{}
 

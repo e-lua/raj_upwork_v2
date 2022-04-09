@@ -7,7 +7,7 @@ import (
 func Si_Find() ([]models.TradableSymbols, error) {
 
 	db := models.SingleStoreCN
-	q := "SELECT symbol,name,price,exchange,exchangeShortName FROM TradableSymbols"
+	q := `SELECT symbol,name,price,exchange,exchangeShortName FROM TradableSymbols`
 	rows, error_show := db.Query(q)
 
 	oListTS := []models.TradableSymbols{}
