@@ -1,7 +1,6 @@
 package available_traded
 
 import (
-	"log"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -64,8 +63,6 @@ func (fr *fundamentalsRouter_pg) GetIncomeStatement(c echo.Context) error {
 		results := Response_IncomenStatement_Annual{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
 		return c.JSON(400, results)
 	}
-
-	log.Println(symbol + limit + period)
 
 	if period != "quarter" {
 		status, boolerror, dataerror, data := GetIncomeStatementAnnual_Service(symbol, limit_int)

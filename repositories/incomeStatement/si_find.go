@@ -1,13 +1,18 @@
 package all
 
 import (
+	"log"
+	"strconv"
+
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
 func Si_Find_Annual(symbol string, limit int) ([]models.IncomeStatement_Annual, error) {
 
+	log.Println(symbol + strconv.Itoa(limit))
+
 	db := models.SingleStoreCN
-	q := "SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,revenue,costOfRevenue,grossProfit,grossProfitRatio,researchAndDevelopmentExpenses,generalAndAdministrativeExpenses,sellingAndMarketingExpenses,sellingGeneralAndAdministrativeExpenses,otherExpenses,operatingExpenses,costAndExpenses,interestIncome,interestExpense,depreciationAndAmortization,ebitda,ebitdaratio,operatingIncome,operatingIncomeRatio,totalOtherIncomeExpensesNet,incomeBeforeTax,incomeBeforeTaxRatio,incomeTaxExpense,netIncome,netIncomeRatio,eps,epsdiluted,weightedAverageShsOut,weightedAverageShsOutDil,link,finalLink FROM IncomeStatement_Annual WHERE symbol = ? LIMIT ?"
+	q := "SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,revenue,costOfRevenue,grossProfit,grossProfitRatio,researchAndDevelopmentExpenses,generalAndAdministrativeExpenses,sellingAndMarketingExpenses,sellingGeneralAndAdministrativeExpenses,otherExpenses,operatingExpenses,costAndExpenses,interestIncome,interestExpense,depreciationAndAmortization,ebitda,ebitdaratio,operatingIncome,operatingIncomeRatio,totalOtherIncomeExpensesNet,incomeBeforeTax,incomeBeforeTaxRatio,incomeTaxExpense,netIncome,netIncomeRatio,eps,epsdiluted,weightedAverageShsOut,weightedAverageShsOutDil,link,finalLink FROM IncomeStatement_Annual WHERE symbol=? LIMIT ?"
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListISA := []models.IncomeStatement_Annual{}
