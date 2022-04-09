@@ -7,7 +7,7 @@ import (
 func Si_Find_Annual(symbol string, limit int) ([]models.IncomeStatement_Annual, error) {
 
 	db := models.SingleStoreCN
-	q := "SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,revenue,costOfRevenue,grossProfit,grossProfitRatio,researchAndDevelopmentExpenses,generalAndAdministrativeExpenses,sellingAndMarketingExpenses,sellingGeneralAndAdministrativeExpenses,otherExpenses,operatingExpenses,costAndExpenses,interestIncome,interestExpense,depreciationAndAmortization,ebitda,ebitdaratio,operatingIncome,operatingIncomeRatio,totalOtherIncomeExpensesNet,incomeBeforeTax,incomeBeforeTaxRatio,incomeTaxExpense,netIncome,netIncomeRatio,eps,epsdiluted,weightedAverageShsOut,weightedAverageShsOutDil,link,finalLink FROM IncomeStatement_Annual WHERE symbol=? LIMIT ?"
+	q := "SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,revenue,costOfRevenue,grossProfit,grossProfitRatio,researchAndDevelopmentExpenses,generalAndAdministrativeExpenses,sellingAndMarketingExpenses,sellingGeneralAndAdministrativeExpenses,otherExpenses,operatingExpenses,costAndExpenses,interestIncome,interestExpense,depreciationAndAmortization,ebitda,ebitdaratio,operatingIncome,operatingIncomeRatio,totalOtherIncomeExpensesNet,incomeBeforeTax,incomeBeforeTaxRatio,incomeTaxExpense,netIncome,netIncomeRatio,eps,epsdiluted,weightedAverageShsOut,weightedAverageShsOutDil,link,finalLink FROM IncomeStatement_Annual WHERE symbol = ? LIMIT ?"
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListISA := []models.IncomeStatement_Annual{}
@@ -68,7 +68,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.IncomeStatement_Annual, 
 func Si_Find_Quarter(symbol string, limit int) ([]models.IncomeStatement_Quarter, error) {
 
 	db := models.SingleStoreCN
-	q := "SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,revenue,costOfRevenue,grossProfit,grossProfitRatio,researchAndDevelopmentExpenses,generalAndAdministrativeExpenses,sellingAndMarketingExpenses,sellingGeneralAndAdministrativeExpenses,otherExpenses,operatingExpenses,costAndExpenses,interestIncome,interestExpense,depreciationAndAmortization,ebitda,ebitdaratio,operatingIncome,operatingIncomeRatio,totalOtherIncomeExpensesNet,incomeBeforeTax,incomeBeforeTaxRatio,incomeTaxExpense,netIncome,netIncomeRatio,eps,epsdiluted,weightedAverageShsOut,weightedAverageShsOutDil,link,finalLink FROM IncomeStatement_Quarter WHERE symbol=? LIMIT ?"
+	q := "SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,revenue,costOfRevenue,grossProfit,grossProfitRatio,researchAndDevelopmentExpenses,generalAndAdministrativeExpenses,sellingAndMarketingExpenses,sellingGeneralAndAdministrativeExpenses,otherExpenses,operatingExpenses,costAndExpenses,interestIncome,interestExpense,depreciationAndAmortization,ebitda,ebitdaratio,operatingIncome,operatingIncomeRatio,totalOtherIncomeExpensesNet,incomeBeforeTax,incomeBeforeTaxRatio,incomeTaxExpense,netIncome,netIncomeRatio,eps,epsdiluted,weightedAverageShsOut,weightedAverageShsOutDil,link,finalLink FROM IncomeStatement_Quarter WHERE symbol = ? LIMIT ?"
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListISQ := []models.IncomeStatement_Quarter{}
@@ -129,7 +129,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.IncomeStatement_Quarter
 func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.IncomeStatement_AnnualGrowth, error) {
 
 	db := models.SingleStoreCN
-	q := "SELECT date,symbol,period,growthRevenue,growthCostOfRevenue,growthGrossProfit,growthGrossProfitRatio,growthResearchAndDevelopmentExpenses,growthGeneralAndAdministrativeExpenses,growthSellingAndMarketingExpenses,growthOtherExpenses,growthOperatingExpenses,growthCostAndExpenses,growthInterestExpense,growthDepreciationAndAmortization,growthEBITDA,growthEBITDARatio,growthOperatingIncome,growthOperatingIncomeRatio,growthTotalOtherIncomeExpensesNet,growthIncomeBeforeTax,growthIncomeBeforeTaxRatio,growthIncomeTaxExpense,growthNetIncome,growthNetIncomeRatio,growthEPS,growthEPSDiluted,growthWeightedAverageShsOut,growthWeightedAverageShsOutDil FROM IncomeStatement_AnnualGrowth WHERE symbol=? LIMIT ?"
+	q := "SELECT date,symbol,period,growthRevenue,growthCostOfRevenue,growthGrossProfit,growthGrossProfitRatio,growthResearchAndDevelopmentExpenses,growthGeneralAndAdministrativeExpenses,growthSellingAndMarketingExpenses,growthOtherExpenses,growthOperatingExpenses,growthCostAndExpenses,growthInterestExpense,growthDepreciationAndAmortization,growthEBITDA,growthEBITDARatio,growthOperatingIncome,growthOperatingIncomeRatio,growthTotalOtherIncomeExpensesNet,growthIncomeBeforeTax,growthIncomeBeforeTaxRatio,growthIncomeTaxExpense,growthNetIncome,growthNetIncomeRatio,growthEPS,growthEPSDiluted,growthWeightedAverageShsOut,growthWeightedAverageShsOutDil FROM IncomeStatement_AnnualGrowth WHERE symbol = ? LIMIT ?"
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListISAG := []models.IncomeStatement_AnnualGrowth{}
@@ -181,7 +181,7 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.IncomeStatement_An
 func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.IncomeStatement_QuarterGrowth, error) {
 
 	db := models.SingleStoreCN
-	q := "SELECT date,symbol,period,growthRevenue,growthCostOfRevenue,growthGrossProfit,growthGrossProfitRatio,growthResearchAndDevelopmentExpenses,growthGeneralAndAdministrativeExpenses,growthSellingAndMarketingExpenses,growthOtherExpenses,growthOperatingExpenses,growthCostAndExpenses,growthInterestExpense,growthDepreciationAndAmortization,growthEBITDA,growthEBITDARatio,growthOperatingIncome,growthOperatingIncomeRatio,growthTotalOtherIncomeExpensesNet,growthIncomeBeforeTax,growthIncomeBeforeTaxRatio,growthIncomeTaxExpense,growthNetIncome,growthNetIncomeRatio,growthEPS,growthEPSDiluted,growthWeightedAverageShsOut,growthWeightedAverageShsOutDil FROM IncomeStatement_QuarterGrowth WHERE symbol=? LIMIT ?"
+	q := "SELECT date,symbol,period,growthRevenue,growthCostOfRevenue,growthGrossProfit,growthGrossProfitRatio,growthResearchAndDevelopmentExpenses,growthGeneralAndAdministrativeExpenses,growthSellingAndMarketingExpenses,growthOtherExpenses,growthOperatingExpenses,growthCostAndExpenses,growthInterestExpense,growthDepreciationAndAmortization,growthEBITDA,growthEBITDARatio,growthOperatingIncome,growthOperatingIncomeRatio,growthTotalOtherIncomeExpensesNet,growthIncomeBeforeTax,growthIncomeBeforeTaxRatio,growthIncomeTaxExpense,growthNetIncome,growthNetIncomeRatio,growthEPS,growthEPSDiluted,growthWeightedAverageShsOut,growthWeightedAverageShsOutDil FROM IncomeStatement_QuarterGrowth WHERE symbol = ? LIMIT ?"
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListISQG := []models.IncomeStatement_QuarterGrowth{}

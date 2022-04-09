@@ -10,7 +10,7 @@ func Si_Find(symbol string) (string, error) {
 	var symbol_output string
 
 	db := models.SingleStoreCN
-	q := `SELECT symbol FROM CompanyProfile WHERE symbol=?`
+	q := `SELECT symbol FROM CompanyProfile WHERE symbol = ?`
 	error_show := db.QueryRow(q, symbol).Scan(&symbol_output)
 	if error_show != nil {
 		return symbol_output, error_show
