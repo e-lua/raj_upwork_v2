@@ -106,10 +106,9 @@ type Response_string struct {
 
 /*-----INCOMING DATA-----*/
 type Incoming_NewData struct {
-	Symbol             string `json:"symbol"`
-	Api_token          string `json:"api_token"`
-	WithTradedList     bool   `json:"with_tradedlist"`
-	WithCompanyProfile bool   `json:"with_companyprofile"`
+	Symbol         string `json:"symbol"`
+	Api_token      string `json:"api_token"`
+	WithTradedList bool   `json:"with_tradedlist"`
 }
 type Incoming_Request struct {
 	Code          string `json:"code"`

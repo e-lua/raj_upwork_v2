@@ -9,7 +9,6 @@ import (
 	all "github.com/Aphofisis/raj_upwork_v2/repositories/all"
 	balanceSheet "github.com/Aphofisis/raj_upwork_v2/repositories/balanceSheet"
 	cashFlow "github.com/Aphofisis/raj_upwork_v2/repositories/cashFlow"
-	companyProfile "github.com/Aphofisis/raj_upwork_v2/repositories/companyProfile"
 	financialRatios "github.com/Aphofisis/raj_upwork_v2/repositories/financialRatios"
 	incomeStatement "github.com/Aphofisis/raj_upwork_v2/repositories/incomeStatement"
 	keyMetrics "github.com/Aphofisis/raj_upwork_v2/repositories/keyMetrics"
@@ -18,21 +17,28 @@ import (
 
 func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string) {
 
+	log.Print("-------->VALIDATING IF THE DATA ALREADY EXISTS")
+	symbol, error_search := all.Si_Find(input_data.Symbol)
+	if error_search != nil {
+		return 403, true, "Internal error when searching if data already exists: " + error_search.Error(), ""
+	}
+	if symbol != "" {
+		return 404, true, "Data already exists", ""
+	}
+
 	log.Print("-------->STARTING EXTRACTION DATA PROCESS")
 
 	var get_respuesta_companyprofile []models.CompanyProfile
-	//Company profile
-	if input_data.WithCompanyProfile {
-		source_data, error_get := http.Get("https://fmpcloud.io/api/v3/profile/" + input_data.Symbol + "?apikey=" + input_data.Api_token)
-		if error_get != nil {
-			return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
-		}
-		error_decode_respuesta := json.NewDecoder(source_data.Body).Decode(&get_respuesta_companyprofile)
-		if error_decode_respuesta != nil {
-			return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
-		}
-		log.Print("-------->Company profile-> extracted")
+
+	source_data, error_get := http.Get("https://fmpcloud.io/api/v3/profile/" + input_data.Symbol + "?apikey=" + input_data.Api_token)
+	if error_get != nil {
+		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
 	}
+	error_decode_respuesta_cp := json.NewDecoder(source_data.Body).Decode(&get_respuesta_companyprofile)
+	if error_decode_respuesta_cp != nil {
+		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_decode_respuesta_cp.Error(), ""
+	}
+	log.Print("-------->Company profile-> extracted")
 
 	var get_respuesta_trad []models.TradableSymbols
 	//Trader list
@@ -265,16 +271,9 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 	log.Print("-------->Key Metrics Quarter-> extracted")
 	log.Print("-------->SUCCESSFUL EXTRACTION DATA PROCESS")
 
-	error_add := all.Si_Add(get_respuesta_isa, get_respuesta_isq, get_respuesta_isa_isag, get_respuesta_isqg, get_respuesta_bsa, get_respuesta_bsq, get_respuesta_bsag, get_respuesta_bsqg, get_respuesta_cfa, get_respuesta_cfq, get_respuesta_cfag, get_respuesta_cfqg, get_respuesta_fra, get_respuesta_frq, get_respuesta_frattm, get_respuesta_kmcttm, get_respuesta_kma, get_respuesta_kmq)
+	error_add := all.Si_Add(get_respuesta_companyprofile, get_respuesta_isa, get_respuesta_isq, get_respuesta_isa_isag, get_respuesta_isqg, get_respuesta_bsa, get_respuesta_bsq, get_respuesta_bsag, get_respuesta_bsqg, get_respuesta_cfa, get_respuesta_cfq, get_respuesta_cfag, get_respuesta_cfqg, get_respuesta_fra, get_respuesta_frq, get_respuesta_frattm, get_respuesta_kmcttm, get_respuesta_kma, get_respuesta_kmq)
 	if error_add != nil {
 		return 403, true, "Internal error when data load started: " + error_add.Error(), ""
-	}
-
-	if input_data.WithCompanyProfile {
-		error_add_cp := companyProfile.Si_Add(get_respuesta_companyprofile)
-		if error_add_cp != nil {
-			return 403, true, "Internal error when Company Profile data load started: " + error_add_cp.Error(), ""
-		}
 	}
 
 	if input_data.WithTradedList {
