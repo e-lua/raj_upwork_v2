@@ -18,10 +18,7 @@ import (
 func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string) {
 
 	log.Print("-------->VALIDATING IF THE DATA ALREADY EXISTS")
-	symbol, error_search := all.Si_Find(input_data.Symbol)
-	if error_search != nil {
-		return 403, true, "Internal error when searching if data already exists: " + error_search.Error(), ""
-	}
+	symbol, _ := all.Si_Find(input_data.Symbol)
 	if symbol != "" {
 		return 404, true, "Data already exists", ""
 	}
