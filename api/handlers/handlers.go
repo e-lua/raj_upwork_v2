@@ -36,6 +36,8 @@ func Handlers() {
 	router_fundamentals.GET("/ratios-ttm/:symbol", service.FundamentalsRouter_pg.GetRatiosTTM)
 	router_fundamentals.GET("/key-metrics/:symbol", service.FundamentalsRouter_pg.GetKeyMetrics)
 	router_fundamentals.GET("/key-metrics-ttm/:symbol", service.FundamentalsRouter_pg.GetKeyMetricsTTM)
+	router_fundamentals.GET("/available-traded/list", service.FundamentalsRouter_pg.GetAvailableTraded)
+	router_fundamentals.GET("/profile/:symbol", service.FundamentalsRouter_pg.GetCompanyProfile)
 
 	//Abrimos el puerto
 	PORT := os.Getenv("PORT")

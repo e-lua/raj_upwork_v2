@@ -97,6 +97,17 @@ type Response_KeyMetrics_CompanyTTM struct {
 	DataError string                         `json:"dataError"`
 	Data      []models.KeyMetrics_CompanyTTM `json:"data"`
 }
+type Response_TradableSymbols struct {
+	Error     bool                     `json:"error"`
+	DataError string                   `json:"dataError"`
+	Data      []models.TradableSymbols `json:"data"`
+}
+
+type Response_CompanyProfile struct {
+	Error     bool                  `json:"error"`
+	DataError string                `json:"dataError"`
+	Data      models.CompanyProfile `json:"data"`
+}
 
 type Response_string struct {
 	Error     bool   `json:"error"`

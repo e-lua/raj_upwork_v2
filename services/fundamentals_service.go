@@ -12,6 +12,7 @@ import (
 	financialRatios "github.com/Aphofisis/raj_upwork_v2/repositories/financialRatios"
 	incomeStatement "github.com/Aphofisis/raj_upwork_v2/repositories/incomeStatement"
 	keyMetrics "github.com/Aphofisis/raj_upwork_v2/repositories/keyMetrics"
+	profile "github.com/Aphofisis/raj_upwork_v2/repositories/profile"
 	tradableSymbols "github.com/Aphofisis/raj_upwork_v2/repositories/tradableSymbols"
 )
 
@@ -461,4 +462,24 @@ func GetKeyMetricsCompanyTTM_Service(symbol string, limit_int int) (int, bool, s
 	}
 
 	return 201, false, "", keymetricsCompanyTTM
+}
+
+func GetAvailableTraded_Service() (int, bool, string, []models.TradableSymbols) {
+
+	tradableSymbols, error_find_all := tradableSymbols.Si_Find()
+	if error_find_all != nil {
+		return 403, true, "Internal error when searching Tradable Symbols data, details: " + error_find_all.Error(), tradableSymbols
+	}
+
+	return 201, false, "", tradableSymbols
+}
+
+func GetCompanyProfile_Service(symbols string) (int, bool, string, models.CompanyProfile) {
+
+	profile, error_find_all := profile.Si_Find_Profile(symbols)
+	if error_find_all != nil {
+		return 403, true, "Internal error when searching Profile data, details: " + error_find_all.Error(), profile
+	}
+
+	return 201, false, "", profile
 }

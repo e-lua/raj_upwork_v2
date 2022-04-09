@@ -354,3 +354,25 @@ func (fr *fundamentalsRouter_pg) GetKeyMetricsTTM(c echo.Context) error {
 	results := Response_KeyMetrics_CompanyTTM{Error: boolerror, DataError: dataerror, Data: data}
 	return c.JSON(status, results)
 }
+
+func (fr *fundamentalsRouter_pg) GetAvailableTraded(c echo.Context) error {
+
+	status, boolerror, dataerror, data := GetAvailableTraded_Service()
+	results := Response_TradableSymbols{Error: boolerror, DataError: dataerror, Data: data}
+	return c.JSON(status, results)
+}
+
+func (fr *fundamentalsRouter_pg) GetCompanyProfile(c echo.Context) error {
+
+	//Recibimos la fecha de la carta
+	symbol := c.Param("symbol")
+	//Validating incoming values
+	if len(symbol) < 1 {
+		results := Response_KeyMetrics_CompanyTTM{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
+		return c.JSON(400, results)
+	}
+
+	status, boolerror, dataerror, data := GetCompanyProfile_Service(symbol)
+	results := Response_CompanyProfile{Error: boolerror, DataError: dataerror, Data: data}
+	return c.JSON(status, results)
+}
