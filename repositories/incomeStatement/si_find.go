@@ -44,7 +44,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.IncomeStatement_Annual, 
 	weightedAverageShsOut,
 	weightedAverageShsOutDil,
 	link,
-	finalLink FROM IncomeStatement_Annual WHERE symbol=? LIMIT ?`
+	finalLink FROM IncomeStatement_Annual WHERE symbol=$1 LIMIT $2`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListISA := []models.IncomeStatement_Annual{}
