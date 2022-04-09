@@ -46,7 +46,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.CashFlow_Annual, error) 
 	capitalExpenditure,
 	freeCashFlow,
 	link,
-	finalLink FROM CashFlow_Annual WHERE symbol=? LIMIT=?`
+	finalLink FROM CashFlow_Annual WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListCFA := []models.CashFlow_Annual{}
@@ -147,7 +147,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.CashFlow_Quarter, error
 	capitalExpenditure,
 	freeCashFlow,
 	link,
-	finalLink FROM CashFlow_Quarter WHERE symbol=? LIMIT=?`
+	finalLink FROM CashFlow_Quarter WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListCFQ := []models.CashFlow_Quarter{}
@@ -241,7 +241,7 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.CashFlow_AnnualGro
     growthCashAtBeginningOfPeriod,
     growthOperatingCashFlow,
     growthCapitalExpenditure,
-    growthFreeCashFlow FROM CashFlow_AnnualGrowth WHERE symbol=? LIMIT=?`
+    growthFreeCashFlow FROM CashFlow_AnnualGrowth WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListCFAG := []models.CashFlow_AnnualGrowth{}
@@ -328,7 +328,7 @@ func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.CashFlow_QuarterG
     growthCashAtBeginningOfPeriod,
     growthOperatingCashFlow,
     growthCapitalExpenditure,
-    growthFreeCashFlow FROM CashFlow_QuarterGrowth WHERE symbol=? LIMIT=?`
+    growthFreeCashFlow FROM CashFlow_QuarterGrowth WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListCFQG := []models.CashFlow_QuarterGrowth{}

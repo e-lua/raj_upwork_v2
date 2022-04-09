@@ -60,7 +60,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.BalanceSheet_Annual, err
 	totalDebt,
 	netDebt,
 	link,
-	finalLink FROM BalanceSheet_Annual WHERE symbol=? LIMIT=?`
+	finalLink FROM BalanceSheet_Annual WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListBSA := []models.BalanceSheet_Annual{}
@@ -189,7 +189,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.BalanceSheet_Quarter, e
 	totalDebt,
 	netDebt,
 	link,
-	finalLink FROM BalanceSheet_Quarter WHERE symbol=? LIMIT=?`
+	finalLink FROM BalanceSheet_Quarter WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListBSQ := []models.BalanceSheet_Quarter{}
@@ -306,7 +306,7 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.BalanceSheet_Annua
     growthTotalLiabilitiesAndStockholdersEquity,
     growthTotalInvestments,
     growthTotalDebt,
-    growthNetDebt FROM BalanceSheet_AnnualGrowth WHERE symbol=? LIMIT=?`
+    growthNetDebt FROM BalanceSheet_AnnualGrowth WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListBSAG := []models.BalanceSheet_AnnualGrowth{}
@@ -411,7 +411,7 @@ func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.BalanceSheet_Quar
     growthTotalLiabilitiesAndStockholdersEquity,
     growthTotalInvestments,
     growthTotalDebt,
-    growthNetDebt FROM BalanceSheet_QuarterGrowth WHERE symbol=? LIMIT=?`
+    growthNetDebt FROM BalanceSheet_QuarterGrowth WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListBSQG := []models.BalanceSheet_QuarterGrowth{}

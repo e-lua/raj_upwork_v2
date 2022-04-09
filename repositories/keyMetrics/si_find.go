@@ -67,7 +67,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.KeyMetrics_Annual, error
 	payablesTurnover,
 	inventoryTurnover,
 	roe,
-	capexPerShare FROM KeyMetrics_Annual WHERE symbol=? LIMIT=?`
+	capexPerShare FROM KeyMetrics_Annual WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListKMA := []models.KeyMetrics_Annual{}
@@ -209,7 +209,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.KeyMetrics_Quarter, err
 	payablesTurnover,
 	inventoryTurnover,
 	roe,
-	capexPerShare FROM KeyMetrics_Quarter WHERE symbol=? LIMIT=?`
+	capexPerShare FROM KeyMetrics_Quarter WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListKMQ := []models.KeyMetrics_Quarter{}
@@ -351,7 +351,7 @@ func Si_Find_companyTTM(symbol string, limit int) ([]models.KeyMetrics_CompanyTT
 	roeTTM,
 	capexPerShareTTM,
 	dividendPerShareTTM,
-	debtToMarketCapTTM FROM KeyMetrics_CompanyTTM WHERE symbol=? LIMIT=?`
+	debtToMarketCapTTM FROM KeyMetrics_CompanyTTM WHERE symbol=? LIMIT ?`
 	rows, error_show := db.Query(q, symbol, limit)
 
 	oListKMCTTM := []models.KeyMetrics_CompanyTTM{}
