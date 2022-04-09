@@ -1,15 +1,17 @@
 package all
 
 import (
+	"log"
+
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
 func Si_Find_Annual(symbol string, limit int) ([]models.KeyMetrics_Annual, error) {
 
 	db := models.SingleStoreCN
-	q := "SELECT symbol,date,period,revenuePerShare,netIncomePerShare,operatingCashFlowPerShare,freeCashFlowPerShare,cashPerShare,bookValuePerShare,tangibleBookValuePerShare,shareholdersEquityPerShare,interestDebtPerShare,marketCap,enterpriseValue,peRatio,priceToSalesRatio,pocfratio,pfcfRatio,pbRatio,ptbRatio,evToSales,enterpriseValueOverEBITDA,evToOperatingCashFlow,evToFreeCashFlow,earningsYield,freeCashFlowYield,debtToEquity,debtToAssets,netDebtToEBITDA,currentRatio,interestCoverage,incomeQuality,dividendYield,payoutRatio,salesGeneralAndAdministrativeToRevenue,researchAndDdevelopementToRevenue,intangiblesToTotalAssets,capexToOperatingCashFlow,capexToRevenue,capexToDepreciation,stockBasedCompensationToRevenue,grahamNumber,roic,returnOnTangibleAssets,grahamNetNet,workingCapital,tangibleAssetValue,netCurrentAssetValue,investedCapital,averageReceivables,averagePayables,averageInventory,daysSalesOutstanding,daysPayablesOutstanding,daysOfInventoryOnHand,receivablesTurnover,payablesTurnover,inventoryTurnover,roe,capexPerShare FROM KeyMetrics_Annual WHERE symbol =" + symbol + "LIMIT ?"
+	q := "SELECT symbol,date,period,revenuePerShare,netIncomePerShare,operatingCashFlowPerShare,freeCashFlowPerShare,cashPerShare,bookValuePerShare,tangibleBookValuePerShare,shareholdersEquityPerShare,interestDebtPerShare,marketCap,enterpriseValue,peRatio,priceToSalesRatio,pocfratio,pfcfRatio,pbRatio,ptbRatio,evToSales,enterpriseValueOverEBITDA,evToOperatingCashFlow,evToFreeCashFlow,earningsYield,freeCashFlowYield,debtToEquity,debtToAssets,netDebtToEBITDA,currentRatio,interestCoverage,incomeQuality,dividendYield,payoutRatio,salesGeneralAndAdministrativeToRevenue,researchAndDdevelopementToRevenue,intangiblesToTotalAssets,capexToOperatingCashFlow,capexToRevenue,capexToDepreciation,stockBasedCompensationToRevenue,grahamNumber,roic,returnOnTangibleAssets,grahamNetNet,workingCapital,tangibleAssetValue,netCurrentAssetValue,investedCapital,averageReceivables,averagePayables,averageInventory,daysSalesOutstanding,daysPayablesOutstanding,daysOfInventoryOnHand,receivablesTurnover,payablesTurnover,inventoryTurnover,roe,capexPerShare FROM KeyMetrics_Annual WHERE symbol =" + symbol + "LIMIT ?,?"
 	stmt, _ := db.Prepare(q)
-	rows, error_show := stmt.Query(limit)
+	rows, error_show := stmt.Query(limit, limit)
 
 	oListKMA := []models.KeyMetrics_Annual{}
 
@@ -17,6 +19,8 @@ func Si_Find_Annual(symbol string, limit int) ([]models.KeyMetrics_Annual, error
 
 		return oListKMA, error_show
 	}
+
+	log.Println("PASSED")
 
 	for rows.Next() {
 		oKMA := models.KeyMetrics_Annual{}
