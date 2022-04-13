@@ -31,16 +31,23 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 	}
 	log.Print("-------->Traded list-> extracted")
 
+	counter := 0
 	for _, val := range get_respuesta_trad {
 
 		var inco_newdata Incoming_NewData
 		inco_newdata.Symbol = val.Symbol
 		inco_newdata.Symbol = input_data.Api_token
 
+		if counter > 20 {
+			break
+		}
+
 		num_code, boolerror, dataerror, errordetail := AddOneData_Service(inco_newdata)
 		if boolerror {
 			return num_code, boolerror, dataerror, errordetail
 		}
+
+		counter = counter + 1
 	}
 
 	return 200, false, "", "OK"
@@ -518,4 +525,14 @@ func GetCompanyProfile_Service(symbols string) (int, bool, string, models.Compan
 	}
 
 	return 201, false, "", profile
+}
+
+func GetIndustryAndSector_Service() (int, bool, string, models.IndustryAndSector) {
+
+	industries_sectors, error_find_all := all.Si_Find_IndustriesAndSector()
+	if error_find_all != nil {
+		return 403, true, "Internal error when searching Industries and Sectors, details: " + error_find_all.Error(), industries_sectors
+	}
+
+	return 201, false, "", industries_sectors
 }

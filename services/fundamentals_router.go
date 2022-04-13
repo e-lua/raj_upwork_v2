@@ -438,3 +438,18 @@ func (fr *fundamentalsRouter_pg) GetCompanyProfile(c echo.Context) error {
 	results := Response_CompanyProfile{Error: boolerror, DataError: dataerror, Data: data}
 	return c.JSON(status, results)
 }
+
+func (fr *fundamentalsRouter_pg) GetIndustryAndSector(c echo.Context) error {
+
+	//Recibimos la fecha de la carta
+	symbol := c.Param("symbol")
+	//Validating incoming values
+	if len(symbol) < 1 {
+		results := Response_KeyMetrics_CompanyTTM{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
+		return c.JSON(400, results)
+	}
+
+	status, boolerror, dataerror, data := GetIndustryAndSector_Service()
+	results := Response_IndustriesSectors{Error: boolerror, DataError: dataerror, Data: data}
+	return c.JSON(status, results)
+}
