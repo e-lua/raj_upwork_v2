@@ -37,9 +37,11 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 		var inco_newdata Incoming_NewData
 		inco_newdata.Symbol = val.Symbol
 		inco_newdata.Symbol = input_data.Api_token
+		input_data.Symbol = val.Symbol
 
 		_, boolerror, dataerror, _ := AddOneData_Service(inco_newdata)
 		if boolerror {
+			log.Println(val.Symbol, input_data.Api_token)
 			log.Println(val.Symbol, "result ? ", dataerror)
 		}
 
@@ -62,19 +64,6 @@ func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, stri
 		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
 	}
 	log.Print("-------->Traded list-> extracted")
-
-	counter := 0
-
-	for _, val := range get_respuesta_trad {
-
-		if len(val.Symbol) <= 0 {
-			break
-		}
-		counter = counter + 1
-
-	}
-
-	log.Println("Total quantity ", counter)
 
 	error_add_tr := tradableSymbols.Si_Add(get_respuesta_trad)
 	if error_add_tr != nil {
