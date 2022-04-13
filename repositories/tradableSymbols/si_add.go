@@ -15,8 +15,9 @@ func Si_Add(ts []models.TradableSymbols) error {
 		name,
 		price,
 		exchange,
-		exchangeShortName) VALUES`
+		exchangeShortName) VALUES `
 	counter_TS := 0
+
 	for _, val := range ts {
 
 		//Insert data in the query
@@ -33,14 +34,26 @@ func Si_Add(ts []models.TradableSymbols) error {
 	//Deleting the last nil value
 	sqlStr_TS = sqlStr_TS[0 : len(sqlStr_TS)-1]
 	/*---------------------------------------------------------------*/
-
-	db := models.SingleStoreCN
+	//BEGIN
+	tx, error_tx := models.SingleStoreCN.Begin()
+	if error_tx != nil {
+		tx.Rollback()
+		return error_tx
+	}
 
 	//TradableSymbols
-	stmt_TS, _ := db.Prepare(sqlStr_TS)
+	stmt_TS, _ := tx.Prepare(sqlStr_TS)
 	if _, err := stmt_TS.Exec(vals_TS...); err != nil {
 		return err
 	}
+
+	//TERMINAMOS LA TRANSACCION
+	err_commit := tx.Commit()
+	if err_commit != nil {
+		tx.Rollback()
+		return err_commit
+	}
+
 	log.Print("LOAD INCOME STATEMENT ANNUAL....Done")
 
 	return nil
