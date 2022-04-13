@@ -44,7 +44,7 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 
 		num_code, boolerror, dataerror, errordetail := AddOneData_Service(inco_newdata)
 		if boolerror {
-			return num_code, boolerror, dataerror, errordetail
+			log.Println(num_code, boolerror, dataerror, errordetail)
 		}
 
 		counter = counter + 1
@@ -321,7 +321,7 @@ func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string)
 
 	error_add := all.Si_Add(input_data.Symbol, get_respuesta_companyprofile, get_respuesta_isa, get_respuesta_isq, get_respuesta_isa_isag, get_respuesta_isqg, get_respuesta_bsa, get_respuesta_bsq, get_respuesta_bsag, get_respuesta_bsqg, get_respuesta_cfa, get_respuesta_cfq, get_respuesta_cfag, get_respuesta_cfqg, get_respuesta_fra, get_respuesta_frq, get_respuesta_frattm, get_respuesta_kmcttm, get_respuesta_kma, get_respuesta_kmq)
 	if error_add != nil {
-		return 403, true, "Internal error when data load started: " + error_add.Error(), ""
+		log.Println(403, true, "Internal error when data load started: "+error_add.Error(), " ")
 	}
 
 	return 201, false, "", "OK"
