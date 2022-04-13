@@ -15,6 +15,15 @@ func Si_Delete(symbol string) error {
 		return error_tx
 	}
 
+	//Company profile
+	q_cop := `DELETE FROM CompanyProfile WHERE symbol=?`
+	_, error_delete_cop := tx.Query(q_cop, symbol)
+	if error_delete_cop != nil {
+		tx.Rollback()
+		return error_delete_cop
+	}
+	log.Print("DELETED COMPANY PROFILE....Done")
+
 	//Income Statement Annual
 	q_isa := `DELETE FROM IncomeStatement_Annual WHERE symbol=?`
 	_, error_delete_isa := tx.Query(q_isa, symbol)
