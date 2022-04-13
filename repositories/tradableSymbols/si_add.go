@@ -41,7 +41,7 @@ func Si_Add(ts []models.TradableSymbols) error {
 
 	//TradableSymbols
 	stmt_TS, _ := tx.Prepare(sqlStr_TS)
-	if _, err := stmt_TS.Exec(vals_TS...); err != nil {
+	if _, err := stmt_TS.Exec(vals_TS); err != nil {
 		return err
 	}
 
