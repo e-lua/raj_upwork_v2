@@ -28,7 +28,7 @@ func Si_Add(ts []models.TradableSymbols) error {
 			val.Exchange,
 			val.ExchangeShortName)
 
-		if counter_TS > 3 {
+		if counter_TS > 20000 {
 			break
 		}
 
