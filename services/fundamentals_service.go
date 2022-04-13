@@ -524,12 +524,22 @@ func GetCompanyProfile_Service(symbols string) (int, bool, string, models.Compan
 	return 201, false, "", profile
 }
 
-func GetIndustryAndSector_Service() (int, bool, string, []models.IndustryAndSector) {
+func GetIndustries_Service() (int, bool, string, []string) {
 
-	industries_sectors, error_find_all := all.Si_Find_IndustriesAndSector()
+	industries, error_find_all := all.Si_Find_Industries()
 	if error_find_all != nil {
-		return 403, true, "Internal error when searching Industries and Sectors, details: " + error_find_all.Error(), industries_sectors
+		return 403, true, "Internal error when searching Industries, details: " + error_find_all.Error(), industries
 	}
 
-	return 201, false, "", industries_sectors
+	return 201, false, "", industries
+}
+
+func GetSectors_Service() (int, bool, string, []string) {
+
+	sectors, error_find_all := all.Si_Find_Sectors()
+	if error_find_all != nil {
+		return 403, true, "Internal error when searching Sectors, details: " + error_find_all.Error(), sectors
+	}
+
+	return 201, false, "", sectors
 }

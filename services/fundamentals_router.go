@@ -439,9 +439,16 @@ func (fr *fundamentalsRouter_pg) GetCompanyProfile(c echo.Context) error {
 	return c.JSON(status, results)
 }
 
-func (fr *fundamentalsRouter_pg) GetIndustryAndSector(c echo.Context) error {
+func (fr *fundamentalsRouter_pg) GetIndustries(c echo.Context) error {
 
-	status, boolerror, dataerror, data := GetIndustryAndSector_Service()
-	results := Response_IndustriesSectors{Error: boolerror, DataError: dataerror, Data: data}
+	status, boolerror, dataerror, data := GetIndustries_Service()
+	results := Response_ListString{Error: boolerror, DataError: dataerror, Data: data}
+	return c.JSON(status, results)
+}
+
+func (fr *fundamentalsRouter_pg) GetSectors(c echo.Context) error {
+
+	status, boolerror, dataerror, data := GetSectors_Service()
+	results := Response_ListString{Error: boolerror, DataError: dataerror, Data: data}
 	return c.JSON(status, results)
 }

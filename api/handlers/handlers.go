@@ -40,7 +40,8 @@ func Handlers() {
 	router_fundamentals.GET("/key-metrics-ttm/:symbol", service.FundamentalsRouter_pg.GetKeyMetricsTTM)
 	router_fundamentals.GET("/available-traded/list", service.FundamentalsRouter_pg.GetAvailableTraded)
 	router_fundamentals.GET("/profile/:symbol", service.FundamentalsRouter_pg.GetCompanyProfile)
-	router_fundamentals.GET("/industry-sector", service.FundamentalsRouter_pg.GetIndustryAndSector)
+	router_fundamentals.GET("/industries", service.FundamentalsRouter_pg.GetIndustries)
+	router_fundamentals.GET("/sectors", service.FundamentalsRouter_pg.GetSectors)
 
 	//Abrimos el puerto
 	PORT := os.Getenv("PORT")

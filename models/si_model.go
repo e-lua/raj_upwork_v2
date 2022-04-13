@@ -1865,8 +1865,3 @@ type CompanyProfile_Response struct {
 	IsAdr             bool    `json:"isAdr"`
 	IsFund            bool    `json:"isFund"`
 }
-
-type IndustryAndSector struct {
-	Industries string `json:"industries"`
-	Sectors    string `json:"sectors"`
-}

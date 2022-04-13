@@ -109,10 +109,10 @@ type Response_CompanyProfile struct {
 	Data      models.CompanyProfile `json:"data"`
 }
 
-type Response_IndustriesSectors struct {
-	Error     bool                       `json:"error"`
-	DataError string                     `json:"dataError"`
-	Data      []models.IndustryAndSector `json:"data"`
+type Response_ListString struct {
+	Error     bool     `json:"error"`
+	DataError string   `json:"dataError"`
+	Data      []string `json:"data"`
 }
 
 type Response_string struct {
