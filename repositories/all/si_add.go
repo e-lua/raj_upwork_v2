@@ -2081,7 +2081,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	sqlStr_CP = sqlStr_CP[0 : len(sqlStr_CP)-1]
 	/*---------------------------------------------------------------*/
 
-	log.Println(sqlStr_CP)
+	log.Println(vals_ISA)
 
 	//BEGIN
 	tx, error_tx := models.SingleStoreCN.Begin()
