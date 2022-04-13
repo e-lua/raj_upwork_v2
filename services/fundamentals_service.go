@@ -38,9 +38,9 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 		inco_newdata.Symbol = val.Symbol
 		inco_newdata.Symbol = input_data.Api_token
 
-		num_code, boolerror, dataerror, errordetail := AddOneData_Service(inco_newdata)
+		_, boolerror, dataerror, _ := AddOneData_Service(inco_newdata)
 		if boolerror {
-			log.Println(num_code, boolerror, dataerror, errordetail)
+			log.Println(val.Symbol, "result ? ", dataerror)
 		}
 
 		counter = counter + 1
