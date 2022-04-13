@@ -10,7 +10,7 @@ func Si_Find_Industries() ([]string, error) {
 	var ouput []string
 
 	db := models.SingleStoreCN
-	q := `SELECT industry FROM CompanyProfile GROUP BY industry`
+	q := `SELECT industry FROM CompanyProfile  WHERE industry<>'' GROUP BY industry`
 	rows, error_show := db.Query(q)
 
 	if error_show != nil {
@@ -33,7 +33,7 @@ func Si_Find_Sectors() ([]string, error) {
 	var ouput []string
 
 	db := models.SingleStoreCN
-	q := `SELECT sector FROM CompanyProfile GROUP BY sector`
+	q := `SELECT sector FROM CompanyProfile  WHERE industry<>'' GROUP BY sector`
 	rows, error_show := db.Query(q)
 
 	if error_show != nil {
