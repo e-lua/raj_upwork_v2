@@ -1995,7 +1995,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 
 	/*-------------------DATA: CompanyProfile---------------*/
 	vals_CP := []interface{}{}
-	sqlStr_CP := `INSERT INTO CompanyProfile(
+	sqlStr_CP := `INSERT INTO CompanyProfile2(
 	symbol,
 	price,
 	beta,
