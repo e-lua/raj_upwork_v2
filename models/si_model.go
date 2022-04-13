@@ -1871,6 +1871,6 @@ type CompanyProfile_Response struct {
 }
 
 type IndustryAndSector struct {
-	Industries interface{} `json:"industries"`
-	Sectors    interface{} `json:"sectors"`
+	Industries string `json:"industries"`
+	Sectors    string `json:"sectors"`
 }

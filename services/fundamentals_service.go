@@ -527,7 +527,7 @@ func GetCompanyProfile_Service(symbols string) (int, bool, string, models.Compan
 	return 201, false, "", profile
 }
 
-func GetIndustryAndSector_Service() (int, bool, string, models.IndustryAndSector) {
+func GetIndustryAndSector_Service() (int, bool, string, []models.IndustryAndSector) {
 
 	industries_sectors, error_find_all := all.Si_Find_IndustriesAndSector()
 	if error_find_all != nil {
