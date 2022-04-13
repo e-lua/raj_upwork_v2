@@ -7,7 +7,7 @@ import (
 func Si_Find() ([]models.TradableSymbols, error) {
 
 	db := models.SingleStoreCN
-	q := `SELECT symbol,name,price,exchange,exchangeShortName FROM TradableSymbols`
+	q := `SELECT symbol FROM TradableSymbols`
 	rows, error_show := db.Query(q)
 
 	oListTS := []models.TradableSymbols{}
@@ -19,12 +19,7 @@ func Si_Find() ([]models.TradableSymbols, error) {
 
 	for rows.Next() {
 		oTS := models.TradableSymbols{}
-		rows.Scan(&oTS.Symbol,
-			&oTS.Name,
-			&oTS.Price,
-			&oTS.Exchange,
-			&oTS.ExchangeShortName,
-		)
+		rows.Scan(&oTS.Symbol)
 		oListTS = append(oListTS, oTS)
 	}
 

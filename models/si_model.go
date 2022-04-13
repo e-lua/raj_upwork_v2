@@ -704,11 +704,7 @@ type IncomeStatement_QuarterGrowth struct {
 }
 
 type TradableSymbols struct {
-	Symbol            string  `json:"symbol"`
-	Name              string  `json:"name"`
-	Price             float32 `json:"price"`
-	Exchange          string  `json:"exchange"`
-	ExchangeShortName string  `json:"exchangeShortName"`
+	Symbol string `json:"symbol"`
 }
 
 type KeyMetrics_CompanyTTM struct {
