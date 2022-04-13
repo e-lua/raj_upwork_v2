@@ -35,8 +35,7 @@ func Si_Add(ts []models.TradableSymbols) error {
 		//Sum counter
 		counter_TS = counter_TS + 1
 	}
-	//Deleting the last nil value
-	sqlStr_TS = sqlStr_TS[0 : len(sqlStr_TS)-1]
+
 	/*---------------------------------------------------------------*/
 
 	//BEGIN
