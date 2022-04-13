@@ -38,9 +38,10 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 		inco_newdata.Symbol = val.Symbol
 		inco_newdata.Api_token = input_data.Api_token
 
+		log.Println(val.Symbol, input_data.Api_token)
+
 		_, boolerror, dataerror, _ := AddOneData_Service(inco_newdata)
 		if boolerror {
-			log.Println(val.Symbol, input_data.Api_token)
 			log.Println(val.Symbol, "result ? ", dataerror)
 		}
 
