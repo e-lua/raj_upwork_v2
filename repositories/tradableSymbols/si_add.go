@@ -10,22 +10,21 @@ func Si_Add(ts []models.TradableSymbols) error {
 
 	/*-------------------DATA: TradableSymbols---------------*/
 	vals_TS := []interface{}{}
-	sqlStr_TS := `INSERT INTO TradableSymbols(symbol,name,price,exchange,exchangeShortName) VALUES`
+	sqlStr_TS := `INSERT INTO TradableSymbols(symbol) VALUES`
 	counter_TS := 0
 	for _, val := range ts {
 
 		//Insert data in the query
-		sqlStr_TS += "(?,?,?,?,?),"
+		sqlStr_TS += "(?),"
 		//Assign the data to the query
-		vals_TS = append(vals_TS, val.Symbol,
-			val.Name,
-			val.Price,
-			val.Exchange,
-			val.ExchangeShortName)
+		vals_TS = append(vals_TS, val.Symbol)
 
 		//Sum counter
 		counter_TS = counter_TS + 1
 	}
+
+	log.Println("TOTAL INSERTED ", counter_TS)
+
 	//Deleting the last nil value
 	sqlStr_TS = sqlStr_TS[0 : len(sqlStr_TS)-1]
 	/*---------------------------------------------------------------*/
