@@ -2038,7 +2038,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Insert data in the query
 		sqlStr_CP += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
-		vals_CP = append(vals_CP, val.Symbol,
+		vals_CP = append(vals_CP, symbol,
 			val.Price,
 			val.Beta,
 			val.VolAvg,
