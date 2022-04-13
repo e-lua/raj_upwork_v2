@@ -20,7 +20,7 @@ func Conectar_Si_DB() *sql.DB {
 	HOSTNAME := "svc-67e316db-38ba-4a61-821b-cb5e53b4324c-ddl.aws-oregon-2.svc.singlestore.com"
 	PORT := "3306"
 	USERNAME := "admin"
-	PASSWORD := "QE?Bz=LL>yTj}tcc+~@V"
+	PASSWORD := "q4Ha#hByKAus6X3"
 	DATABASE := "TickerDatabase"
 
 	once_pg.Do(func() {
