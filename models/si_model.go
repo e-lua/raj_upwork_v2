@@ -252,7 +252,7 @@ type CashFlow_Annual struct {
 	FinalLink                                string  `json:"finalLink"`
 }
 
-type CashFlow_AnnualGrowth struct {
+type CashFlow_QuarterGrowth struct {
 	Id                                             int64   `json:"id"`
 	Date                                           string  `json:"date"`
 	Symbol                                         string  `json:"symbol"`
@@ -333,7 +333,7 @@ type CashFlow_Quarter struct {
 	FinalLink                                string  `json:"finalLink"`
 }
 
-type CashFlow_QuarterGrowth struct {
+type CashFlow_AnnualGrowth struct {
 	Id                                             int64   `json:"id"`
 	Date                                           string  `json:"date"`
 	Symbol                                         string  `json:"symbol"`
