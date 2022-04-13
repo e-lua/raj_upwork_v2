@@ -16,7 +16,6 @@ func Si_Add(ts []models.TradableSymbols) error {
 		price,
 		exchange,
 		exchangeShortName) VALUES `
-	counter_TS := 0
 
 	for _, val := range ts {
 
@@ -28,12 +27,11 @@ func Si_Add(ts []models.TradableSymbols) error {
 			val.Price,
 			val.Exchange,
 			val.ExchangeShortName)
-		//Sum counter
-		counter_TS = counter_TS + 1
 	}
 	//Deleting the last nil value
 	sqlStr_TS = sqlStr_TS[0 : len(sqlStr_TS)-1]
 	/*---------------------------------------------------------------*/
+
 	//BEGIN
 	tx, error_tx := models.SingleStoreCN.Begin()
 	if error_tx != nil {

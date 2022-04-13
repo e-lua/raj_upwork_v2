@@ -63,7 +63,7 @@ func (fr *fundamentalsRouter_pg) AddTradableSymbolList(c echo.Context) error {
 	//Send data to the service
 	status, boolerror, dataerror, data := AddTradableSymbolList_Service(incoming_newdata)
 
-	response := Response_string{
+	response := Response_interface{
 		Error:     boolerror,
 		DataError: dataerror,
 		Data:      data,

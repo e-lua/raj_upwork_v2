@@ -115,6 +115,12 @@ type Response_string struct {
 	Data      string `json:"data"`
 }
 
+type Response_interface struct {
+	Error     bool        `json:"error"`
+	DataError string      `json:"dataError"`
+	Data      interface{} `json:"data"`
+}
+
 /*-----INCOMING DATA-----*/
 type Incoming_NewData struct {
 	Symbol         string `json:"symbol"`

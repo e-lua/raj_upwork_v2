@@ -46,7 +46,7 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 	return 200, false, "", "OK"
 }
 
-func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, string, string) {
+func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, string, interface{}) {
 
 	var get_respuesta_trad []models.TradableSymbols
 	//Trader list
@@ -61,12 +61,12 @@ func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, stri
 	}
 	log.Print("-------->Traded list-> extracted")
 
-	error_add_tr := tradableSymbols.Si_Add(get_respuesta_trad)
+	/*error_add_tr := tradableSymbols.Si_Add(get_respuesta_trad)
 	if error_add_tr != nil {
 		return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), ""
-	}
+	}*/
 
-	return 200, false, "", "OK"
+	return 200, false, "", get_respuesta_trad
 }
 
 func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string) {
