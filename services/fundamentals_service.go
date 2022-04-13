@@ -38,10 +38,6 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 		inco_newdata.Symbol = val.Symbol
 		inco_newdata.Symbol = input_data.Api_token
 
-		if counter > 20 {
-			break
-		}
-
 		num_code, boolerror, dataerror, errordetail := AddOneData_Service(inco_newdata)
 		if boolerror {
 			log.Println(num_code, boolerror, dataerror, errordetail)
