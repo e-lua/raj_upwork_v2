@@ -119,6 +119,8 @@ type Response_interface struct {
 	Error     bool        `json:"error"`
 	DataError string      `json:"dataError"`
 	Data      interface{} `json:"data"`
+	Data2     interface{} `json:"data2"`
+	Data3     interface{} `json:"data3"`
 }
 
 /*-----INCOMING DATA-----*/
