@@ -946,7 +946,6 @@ type CompanyProfile struct {
 //REPONSE
 
 type BalanceSheet_Annual_Response struct {
-	Id                                      int64   `json:"id"`
 	Date                                    string  `json:"date"`
 	Symbol                                  string  `json:"symbol"`
 	ReportedCurrency                        string  `json:"reportedCurrency"`
@@ -1004,7 +1003,6 @@ type BalanceSheet_Annual_Response struct {
 }
 
 type BalanceSheet_AnnualGrowth_Response struct {
-	Id                                            int64   `json:"id"`
 	Date                                          string  `json:"date"`
 	Symbol                                        string  `json:"symbol"`
 	Period                                        string  `json:"period"`
@@ -1050,7 +1048,6 @@ type BalanceSheet_AnnualGrowth_Response struct {
 }
 
 type BalanceSheet_Quarter_Response struct {
-	Id                                      int64   `json:"id"`
 	Date                                    string  `json:"date"`
 	Symbol                                  string  `json:"symbol"`
 	ReportedCurrency                        string  `json:"reportedCurrency"`
@@ -1108,7 +1105,6 @@ type BalanceSheet_Quarter_Response struct {
 }
 
 type BalanceSheet_QuarterGrowth_Response struct {
-	Id                                            int64   `json:"id"`
 	Date                                          string  `json:"date"`
 	Symbol                                        string  `json:"symbol"`
 	Period                                        string  `json:"period"`
@@ -1154,7 +1150,6 @@ type BalanceSheet_QuarterGrowth_Response struct {
 }
 
 type CashFlow_Annual_Response struct {
-	Id                                       int64   `json:"id"`
 	Date                                     string  `json:"date"`
 	Symbol                                   string  `json:"symbol"`
 	ReportedCurrency                         string  `json:"reportedCurrency"`
@@ -1198,7 +1193,6 @@ type CashFlow_Annual_Response struct {
 }
 
 type CashFlow_AnnualGrowth_Response struct {
-	Id                                             int64   `json:"id"`
 	Date                                           string  `json:"date"`
 	Symbol                                         string  `json:"symbol"`
 	Period                                         string  `json:"period"`
@@ -1235,7 +1229,6 @@ type CashFlow_AnnualGrowth_Response struct {
 }
 
 type CashFlow_Quarter_Response struct {
-	Id                                       int64   `json:"id"`
 	Date                                     string  `json:"date"`
 	Symbol                                   string  `json:"symbol"`
 	ReportedCurrency                         string  `json:"reportedCurrency"`
@@ -1279,7 +1272,6 @@ type CashFlow_Quarter_Response struct {
 }
 
 type CashFlow_QuarterGrowth_Response struct {
-	Id                                             int64   `json:"id"`
 	Date                                           string  `json:"date"`
 	Symbol                                         string  `json:"symbol"`
 	Period                                         string  `json:"period"`
@@ -1316,7 +1308,6 @@ type CashFlow_QuarterGrowth_Response struct {
 }
 
 type FinancialRatio_Annual_Response struct {
-	Id                                 int64   `json:"id"`
 	Date                               string  `json:"date"`
 	Symbol                             string  `json:"symbol"`
 	Period                             string  `json:"period"`
@@ -1376,7 +1367,6 @@ type FinancialRatio_Annual_Response struct {
 }
 
 type FinancialRatio_AnnualTTM_Response struct {
-	Id                                    int64   `json:"id"`
 	Symbol                                string  `json:"symbol"`
 	DividendYielTTM                       float32 `json:"dividendYielTTM"`
 	DividendYielPercentageTTM             float32 `json:"dividendYielPercentageTTM"`
@@ -1439,7 +1429,6 @@ type FinancialRatio_AnnualTTM_Response struct {
 }
 
 type FinancialRatio_Quarter_Response struct {
-	Id                                 int64   `json:"id"`
 	Date                               string  `json:"date"`
 	Symbol                             string  `json:"symbol"`
 	Period                             string  `json:"period"`
@@ -1499,7 +1488,6 @@ type FinancialRatio_Quarter_Response struct {
 }
 
 type IncomeStatement_Annual_Response struct {
-	Id                                      int64   `json:"id"`
 	Symbol                                  string  `json:"symbol"`
 	Date                                    string  `json:"date"`
 	ReportedCurrency                        string  `json:"reportedCurrency"`
@@ -1541,7 +1529,6 @@ type IncomeStatement_Annual_Response struct {
 }
 
 type IncomeStatement_AnnualGrowth_Response struct {
-	Id                                     int64   `json:"id"`
 	Date                                   string  `json:"date"`
 	Symbol                                 string  `json:"symbol"`
 	Period                                 string  `json:"period"`
@@ -1574,7 +1561,6 @@ type IncomeStatement_AnnualGrowth_Response struct {
 }
 
 type IncomeStatement_Quarter_Response struct {
-	Id                                      int64   `json:"id"`
 	Symbol                                  string  `json:"symbol"`
 	Date                                    string  `json:"date"`
 	ReportedCurrency                        string  `json:"reportedCurrency"`
@@ -1616,7 +1602,6 @@ type IncomeStatement_Quarter_Response struct {
 }
 
 type IncomeStatement_QuarterGrowth_Response struct {
-	Id                                     int64   `json:"id"`
 	Date                                   string  `json:"date"`
 	Symbol                                 string  `json:"symbol"`
 	Period                                 string  `json:"period"`
@@ -1657,7 +1642,6 @@ type TradableSymbols_Response struct {
 }
 
 type KeyMetrics_CompanyTTM_Response struct {
-	Id                                        int64   `json:"id"`
 	Symbol                                    string  `json:"symbol"`
 	RevenuePerShareTTM                        float32 `json:"revenuePerShareTTM"`
 	NetIncomePerShareTTM                      float32 `json:"netIncomePerShareTTM"`
@@ -1722,7 +1706,6 @@ type KeyMetrics_CompanyTTM_Response struct {
 }
 
 type KeyMetrics_Annual_Response struct {
-	Id                                     int64   `json:"id"`
 	Symbol                                 string  `json:"symbol"`
 	Date                                   string  `json:"date"`
 	Period                                 string  `json:"period"`
@@ -1786,7 +1769,6 @@ type KeyMetrics_Annual_Response struct {
 }
 
 type KeyMetrics_Quarter_Response struct {
-	Id                                     int64   `json:"id"`
 	Symbol                                 string  `json:"symbol"`
 	Date                                   string  `json:"date"`
 	Period                                 string  `json:"period"`
