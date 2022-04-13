@@ -58,7 +58,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		sqlStr_ISA += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
 		vals_ISA = append(vals_ISA, time.Now().UnixMilli()+int64(counter_ISA), val.Date,
-			val.Symbol,
+			symbol,
 			val.ReportedCurrency,
 			val.Cik,
 			val.FillingDate,
@@ -151,7 +151,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		sqlStr_ISQ += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
 		vals_ISQ = append(vals_ISQ, time.Now().UnixMilli()+int64(counter_ISQ), val.Date,
-			val.Symbol,
+			symbol,
 			val.ReportedCurrency,
 			val.Cik,
 			val.FillingDate,
@@ -236,7 +236,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_ISAG = append(vals_ISAG, time.Now().UnixMilli()+int64(counter_ISAG),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.Period,
 			val.GrowthRevenue,
 			val.GrowthCostOfRevenue,
@@ -312,7 +312,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_ISQG = append(vals_ISQG, time.Now().UnixMilli()+int64(counter_ISQG),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.Period,
 			val.GrowthRevenue,
 			val.GrowthCostOfRevenue,
@@ -414,7 +414,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_BSA = append(vals_BSA, time.Now().UnixMilli()+int64(counter_BSA),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.ReportedCurrency,
 			val.Cik,
 			val.FillingDate,
@@ -541,7 +541,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_BSQ = append(vals_BSQ, time.Now().UnixMilli()+int64(counter_BSQ),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.ReportedCurrency,
 			val.Cik,
 			val.FillingDate,
@@ -656,7 +656,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_BSAG = append(vals_BSAG, time.Now().UnixMilli()+int64(counter_BSAG),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.Period,
 			val.GrowthCashAndCashEquivalents,
 			val.GrowthShortTermInvestments,
@@ -759,7 +759,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_BSQG = append(vals_BSQG, time.Now().UnixMilli()+int64(counter_BSQG),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.Period,
 			val.GrowthCashAndCashEquivalents,
 			val.GrowthShortTermInvestments,
@@ -860,7 +860,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_CFA = append(vals_CFA, time.Now().UnixMilli()+int64(counter_CFA),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.ReportedCurrency,
 			val.Cik,
 			val.FillingDate,
@@ -959,7 +959,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_CFQ = append(vals_CFQ, time.Now().UnixMilli()+int64(counter_CFQ),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.ReportedCurrency,
 			val.Cik,
 			val.FillingDate,
@@ -1051,7 +1051,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_CFAG = append(vals_CFAG, time.Now().UnixMilli()+int64(counter_CFAG),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.Period,
 			val.GrowthNetIncome,
 			val.GrowthDepreciationAndAmortization,
@@ -1136,7 +1136,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_CFQG = append(vals_CFQG, time.Now().UnixMilli()+int64(counter_CFQG),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.Period,
 			val.GrowthNetIncome,
 			val.GrowthDepreciationAndAmortization,
@@ -1244,7 +1244,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_FRA = append(vals_FRA, time.Now().UnixMilli()+int64(counter_FRA),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.Period,
 			val.CurrentRatio,
 			val.QuickRatio,
@@ -1375,7 +1375,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		//Assign the data to the query
 		vals_FRQ = append(vals_FRQ, time.Now().UnixMilli()+int64(counter_FRQ),
 			val.Date,
-			val.Symbol,
+			symbol,
 			val.Period,
 			val.CurrentRatio,
 			val.QuickRatio,
@@ -1646,7 +1646,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		sqlStr_KMA += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
 		vals_KMA = append(vals_KMA, time.Now().UnixMilli()+int64(counter_KMA),
-			val.Symbol,
+			symbol,
 			val.Date,
 			val.Period,
 			val.RevenuePerShare,
@@ -1785,7 +1785,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		sqlStr_KMQ += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
 		vals_KMQ = append(vals_KMQ, time.Now().UnixMilli()+int64(counter_KMQ),
-			val.Symbol,
+			symbol,
 			val.Date,
 			val.Period,
 			val.RevenuePerShare,
@@ -1925,7 +1925,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		sqlStr_KMCTTM += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
 		vals_KMCTTM = append(vals_KMCTTM, time.Now().UnixMilli()+int64(counter_KMCTTM),
-			val.Symbol,
+			symbol,
 			val.RevenuePerShareTTM,
 			val.NetIncomePerShareTTM,
 			val.OperatingCashFlowPerShareTTM,
