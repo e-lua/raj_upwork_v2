@@ -6,7 +6,7 @@ import (
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
-func Si_Find_Annual(symbol string, limit int) ([]models.FinancialRatio_Annual, error) {
+func Si_Find_Annual(symbol string, limit int) ([]models.FinancialRatio_Annual_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,
@@ -67,7 +67,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.FinancialRatio_Annual, e
     priceFairValue FROM FinancialRatio_Annual WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListFRA := []models.FinancialRatio_Annual{}
+	oListFRA := []models.FinancialRatio_Annual_Response{}
 
 	if error_show != nil {
 
@@ -75,7 +75,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.FinancialRatio_Annual, e
 	}
 
 	for rows.Next() {
-		oFRA := models.FinancialRatio_Annual{}
+		oFRA := models.FinancialRatio_Annual_Response{}
 		rows.Scan(&oFRA.Date,
 			&oFRA.Symbol,
 			&oFRA.Period,
@@ -139,7 +139,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.FinancialRatio_Annual, e
 	return oListFRA, nil
 }
 
-func Si_Find_Quarter(symbol string, limit int) ([]models.FinancialRatio_Quarter, error) {
+func Si_Find_Quarter(symbol string, limit int) ([]models.FinancialRatio_Quarter_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,
@@ -198,9 +198,9 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.FinancialRatio_Quarter,
     dividendYield,
     enterpriseValueMultiple,
     priceFairValue FROM FinancialRatio_Quarter WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
-	rows, error_show := db.Query(q, symbol, limit)
+	rows, error_show := db.Query(q, symbol)
 
-	oListFRQ := []models.FinancialRatio_Quarter{}
+	oListFRQ := []models.FinancialRatio_Quarter_Response{}
 
 	if error_show != nil {
 
@@ -208,7 +208,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.FinancialRatio_Quarter,
 	}
 
 	for rows.Next() {
-		oFRQ := models.FinancialRatio_Quarter{}
+		oFRQ := models.FinancialRatio_Quarter_Response{}
 		rows.Scan(&oFRQ.Date,
 			&oFRQ.Symbol,
 			&oFRQ.Period,
@@ -272,7 +272,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.FinancialRatio_Quarter,
 	return oListFRQ, nil
 }
 
-func Si_Find_AnnualTTM(symbol string, limit int) ([]models.FinancialRatio_AnnualTTM, error) {
+func Si_Find_AnnualTTM(symbol string, limit int) ([]models.FinancialRatio_AnnualTTM_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT symbol,
@@ -336,7 +336,7 @@ func Si_Find_AnnualTTM(symbol string, limit int) ([]models.FinancialRatio_Annual
     dividendPerShareTTM FROM FinancialRatio_AnnualTTM WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListFRATTM := []models.FinancialRatio_AnnualTTM{}
+	oListFRATTM := []models.FinancialRatio_AnnualTTM_Response{}
 
 	if error_show != nil {
 
@@ -344,7 +344,7 @@ func Si_Find_AnnualTTM(symbol string, limit int) ([]models.FinancialRatio_Annual
 	}
 
 	for rows.Next() {
-		oFRATTM := models.FinancialRatio_AnnualTTM{}
+		oFRATTM := models.FinancialRatio_AnnualTTM_Response{}
 		rows.Scan(&oFRATTM.Symbol,
 			&oFRATTM.DividendYielTTM,
 			&oFRATTM.DividendYielPercentageTTM,

@@ -6,13 +6,13 @@ import (
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
-func Si_Find_Annual(symbol string, limit int) ([]models.BalanceSheet_Annual, error) {
+func Si_Find_Annual(symbol string, limit int) ([]models.BalanceSheet_Annual_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date, symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,cashAndCashEquivalents,shortTermInvestments,cashAndShortTermInvestments,netReceivables,inventory,otherCurrentAssets,totalCurrentAssets,propertyPlantEquipmentNet,goodwill,intangibleAssets,goodwillAndIntangibleAssets,longTermInvestments,taxAssets,otherNonCurrentAssets,totalNonCurrentAssets,otherAssets,totalAssets,accountPayables,shortTermDebt,taxPayables,deferredRevenue,otherCurrentLiabilities,totalCurrentLiabilities,longTermDebt,deferredRevenueNonCurrent,deferredTaxLiabilitiesNonCurrent,otherNonCurrentLiabilities,totalNonCurrentLiabilities,otherLiabilities,capitalLeaseObligations,totalLiabilities,preferredStock,commonStock,retainedEarnings,accumulatedOtherComprehensiveIncomeLoss,othertotalStockholdersEquity,totalStockholdersEquity,totalLiabilitiesAndStockholdersEquity,minorityInterest,totalEquity,totalLiabilitiesAndTotalEquity,totalInvestments,totalDebt,netDebt,link,finalLink FROM BalanceSheet_Annual WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListBSA := []models.BalanceSheet_Annual{}
+	oListBSA := []models.BalanceSheet_Annual_Response{}
 
 	if error_show != nil {
 
@@ -20,7 +20,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.BalanceSheet_Annual, err
 	}
 
 	for rows.Next() {
-		oBSA := models.BalanceSheet_Annual{}
+		oBSA := models.BalanceSheet_Annual_Response{}
 		rows.Scan(&oBSA.Date,
 			&oBSA.Symbol,
 			&oBSA.ReportedCurrency,
@@ -82,13 +82,13 @@ func Si_Find_Annual(symbol string, limit int) ([]models.BalanceSheet_Annual, err
 	return oListBSA, nil
 }
 
-func Si_Find_Quarter(symbol string, limit int) ([]models.BalanceSheet_Quarter, error) {
+func Si_Find_Quarter(symbol string, limit int) ([]models.BalanceSheet_Quarter_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,cashAndCashEquivalents,shortTermInvestments,cashAndShortTermInvestments,netReceivables,inventory,otherCurrentAssets,totalCurrentAssets,propertyPlantEquipmentNet,goodwill,intangibleAssets,goodwillAndIntangibleAssets,longTermInvestments,taxAssets,otherNonCurrentAssets,totalNonCurrentAssets,otherAssets,totalAssets,accountPayables,shortTermDebt,taxPayables,deferredRevenue,otherCurrentLiabilities,totalCurrentLiabilities,longTermDebt,deferredRevenueNonCurrent,deferredTaxLiabilitiesNonCurrent,otherNonCurrentLiabilities,totalNonCurrentLiabilities,otherLiabilities,capitalLeaseObligations,totalLiabilities,preferredStock,commonStock,retainedEarnings,accumulatedOtherComprehensiveIncomeLoss,othertotalStockholdersEquity,totalStockholdersEquity,totalLiabilitiesAndStockholdersEquity,minorityInterest,totalEquity,totalLiabilitiesAndTotalEquity,totalInvestments,totalDebt,netDebt,link,finalLink FROM BalanceSheet_Quarter WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListBSQ := []models.BalanceSheet_Quarter{}
+	oListBSQ := []models.BalanceSheet_Quarter_Response{}
 
 	if error_show != nil {
 
@@ -96,7 +96,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.BalanceSheet_Quarter, e
 	}
 
 	for rows.Next() {
-		oBSQ := models.BalanceSheet_Quarter{}
+		oBSQ := models.BalanceSheet_Quarter_Response{}
 		rows.Scan(&oBSQ.Date,
 			&oBSQ.Symbol,
 			&oBSQ.ReportedCurrency,
@@ -158,13 +158,13 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.BalanceSheet_Quarter, e
 	return oListBSQ, nil
 }
 
-func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.BalanceSheet_AnnualGrowth, error) {
+func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.BalanceSheet_AnnualGrowth_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,period,growthCashAndCashEquivalents,growthShortTermInvestments,growthCashAndShortTermInvestments,growthNetReceivables,growthInventory,growthOtherCurrentAssets,growthTotalCurrentAssets,growthPropertyPlantEquipmentNet,growthGoodwill,growthIntangibleAssets,growthGoodwillAndIntangibleAssets,growthLongTermInvestments,growthTaxAssets,growthOtherNonCurrentAssets,growthTotalNonCurrentAssets,growthOtherAssets,growthTotalAssets,growthAccountPayables,growthShortTermDebt,growthTaxPayables,growthDeferredRevenue,growthOtherCurrentLiabilities,growthTotalCurrentLiabilities,growthLongTermDebt,growthDeferredRevenueNonCurrent,growthDeferrredTaxLiabilitiesNonCurrent,growthOtherNonCurrentLiabilities,growthTotalNonCurrentLiabilities,growthOtherLiabilities,growthTotalLiabilities,growthCommonStock,growthRetainedEarnings,growthAccumulatedOtherComprehensiveIncomeLoss,growthOthertotalStockholdersEquity,growthTotalStockholdersEquity,growthTotalLiabilitiesAndStockholdersEquity,growthTotalInvestments,growthTotalDebt,growthNetDebt FROM BalanceSheet_AnnualGrowth WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListBSAG := []models.BalanceSheet_AnnualGrowth{}
+	oListBSAG := []models.BalanceSheet_AnnualGrowth_Response{}
 
 	if error_show != nil {
 
@@ -172,7 +172,7 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.BalanceSheet_Annua
 	}
 
 	for rows.Next() {
-		oBSAG := models.BalanceSheet_AnnualGrowth{}
+		oBSAG := models.BalanceSheet_AnnualGrowth_Response{}
 		rows.Scan(&oBSAG.Date,
 			&oBSAG.Symbol,
 			&oBSAG.Period,
@@ -222,13 +222,13 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.BalanceSheet_Annua
 	return oListBSAG, nil
 }
 
-func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.BalanceSheet_QuarterGrowth, error) {
+func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.BalanceSheet_QuarterGrowth_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,period,growthCashAndCashEquivalents,growthShortTermInvestments,growthCashAndShortTermInvestments,growthNetReceivables,growthInventory,growthOtherCurrentAssets,growthTotalCurrentAssets,growthPropertyPlantEquipmentNet,growthGoodwill,growthIntangibleAssets,growthGoodwillAndIntangibleAssets,growthLongTermInvestments,growthTaxAssets,growthOtherNonCurrentAssets,growthTotalNonCurrentAssets,growthOtherAssets,growthTotalAssets,growthAccountPayables,growthShortTermDebt,growthTaxPayables,growthDeferredRevenue,growthOtherCurrentLiabilities,growthTotalCurrentLiabilities,growthLongTermDebt,growthDeferredRevenueNonCurrent,growthDeferrredTaxLiabilitiesNonCurrent,growthOtherNonCurrentLiabilities,growthTotalNonCurrentLiabilities,growthOtherLiabilities,growthTotalLiabilities,growthCommonStock,growthRetainedEarnings,growthAccumulatedOtherComprehensiveIncomeLoss,growthOthertotalStockholdersEquity,growthTotalStockholdersEquity,growthTotalLiabilitiesAndStockholdersEquity,growthTotalInvestments,growthTotalDebt,growthNetDebt FROM BalanceSheet_QuarterGrowth WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListBSQG := []models.BalanceSheet_QuarterGrowth{}
+	oListBSQG := []models.BalanceSheet_QuarterGrowth_Response{}
 
 	if error_show != nil {
 
@@ -236,7 +236,7 @@ func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.BalanceSheet_Quar
 	}
 
 	for rows.Next() {
-		oBSQG := models.BalanceSheet_QuarterGrowth{}
+		oBSQG := models.BalanceSheet_QuarterGrowth_Response{}
 		rows.Scan(&oBSQG.Date,
 			&oBSQG.Symbol,
 			&oBSQG.Period,

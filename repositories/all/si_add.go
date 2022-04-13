@@ -7,7 +7,7 @@ import (
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
-func Si_Add(cp []models.CompanyProfile, isa []models.IncomeStatement_Annual, isq []models.IncomeStatement_Quarter, isag []models.IncomeStatement_AnnualGrowth, isqg []models.IncomeStatement_QuarterGrowth, bsa []models.BalanceSheet_Annual, bsq []models.BalanceSheet_Quarter, bsag []models.BalanceSheet_AnnualGrowth, bsqg []models.BalanceSheet_QuarterGrowth, cfa []models.CashFlow_Annual, cfq []models.CashFlow_Quarter, cfag []models.CashFlow_AnnualGrowth, cfqg []models.CashFlow_QuarterGrowth, fra []models.FinancialRatio_Annual, frq []models.FinancialRatio_Quarter, frattm []models.FinancialRatio_AnnualTTM, kmcttm []models.KeyMetrics_CompanyTTM, kma []models.KeyMetrics_Annual, kmq []models.KeyMetrics_Quarter) error {
+func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatement_Annual, isq []models.IncomeStatement_Quarter, isag []models.IncomeStatement_AnnualGrowth, isqg []models.IncomeStatement_QuarterGrowth, bsa []models.BalanceSheet_Annual, bsq []models.BalanceSheet_Quarter, bsag []models.BalanceSheet_AnnualGrowth, bsqg []models.BalanceSheet_QuarterGrowth, cfa []models.CashFlow_Annual, cfq []models.CashFlow_Quarter, cfag []models.CashFlow_AnnualGrowth, cfqg []models.CashFlow_QuarterGrowth, fra []models.FinancialRatio_Annual, frq []models.FinancialRatio_Quarter, frattm []models.FinancialRatio_AnnualTTM, kmcttm []models.KeyMetrics_CompanyTTM, kma []models.KeyMetrics_Annual, kmq []models.KeyMetrics_Quarter) error {
 
 	/*-------------------DATA: IncomeStatement Annual---------------*/
 	vals_ISA := []interface{}{}
@@ -1508,7 +1508,7 @@ func Si_Add(cp []models.CompanyProfile, isa []models.IncomeStatement_Annual, isq
 		sqlStr_FRATTM += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
 		vals_FRATTM = append(vals_FRATTM, time.Now().UnixMilli()+int64(counter_FRATTM),
-			val.Symbol,
+			symbol,
 			val.DividendYielTTM,
 			val.DividendYielPercentageTTM,
 			val.PeRatioTTM,

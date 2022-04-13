@@ -4,98 +4,98 @@ import "github.com/Aphofisis/raj_upwork_v2/models"
 
 /*-----RESPONSE DATA-----*/
 type Response_IncomenStatement_Annual struct {
-	Error     bool                            `json:"error"`
-	DataError string                          `json:"dataError"`
-	Data      []models.IncomeStatement_Annual `json:"data"`
+	Error     bool                                     `json:"error"`
+	DataError string                                   `json:"dataError"`
+	Data      []models.IncomeStatement_Annual_Response `json:"data"`
 }
 type Response_IncomenStatement_Quarter struct {
-	Error     bool                             `json:"error"`
-	DataError string                           `json:"dataError"`
-	Data      []models.IncomeStatement_Quarter `json:"data"`
+	Error     bool                                      `json:"error"`
+	DataError string                                    `json:"dataError"`
+	Data      []models.IncomeStatement_Quarter_Response `json:"data"`
 }
 type Response_IncomenStatement_AnnualGrowth struct {
-	Error     bool                                  `json:"error"`
-	DataError string                                `json:"dataError"`
-	Data      []models.IncomeStatement_AnnualGrowth `json:"data"`
+	Error     bool                                           `json:"error"`
+	DataError string                                         `json:"dataError"`
+	Data      []models.IncomeStatement_AnnualGrowth_Response `json:"data"`
 }
 type Response_IncomenStatement_QuarterGrowth struct {
-	Error     bool                                   `json:"error"`
-	DataError string                                 `json:"dataError"`
-	Data      []models.IncomeStatement_QuarterGrowth `json:"data"`
+	Error     bool                                            `json:"error"`
+	DataError string                                          `json:"dataError"`
+	Data      []models.IncomeStatement_QuarterGrowth_Response `json:"data"`
 }
 
 type Response_BalanceSheet_Annual struct {
-	Error     bool                         `json:"error"`
-	DataError string                       `json:"dataError"`
-	Data      []models.BalanceSheet_Annual `json:"data"`
+	Error     bool                                  `json:"error"`
+	DataError string                                `json:"dataError"`
+	Data      []models.BalanceSheet_Annual_Response `json:"data"`
 }
 type Response_BalanceSheet_Quarter struct {
-	Error     bool                          `json:"error"`
-	DataError string                        `json:"dataError"`
-	Data      []models.BalanceSheet_Quarter `json:"data"`
+	Error     bool                                   `json:"error"`
+	DataError string                                 `json:"dataError"`
+	Data      []models.BalanceSheet_Quarter_Response `json:"data"`
 }
 type Response_BalanceSheet_AnnualGrowth struct {
-	Error     bool                               `json:"error"`
-	DataError string                             `json:"dataError"`
-	Data      []models.BalanceSheet_AnnualGrowth `json:"data"`
+	Error     bool                                        `json:"error"`
+	DataError string                                      `json:"dataError"`
+	Data      []models.BalanceSheet_AnnualGrowth_Response `json:"data"`
 }
 type Response_BalanceSheet_QuarterGrowth struct {
-	Error     bool                                `json:"error"`
-	DataError string                              `json:"dataError"`
-	Data      []models.BalanceSheet_QuarterGrowth `json:"data"`
+	Error     bool                                         `json:"error"`
+	DataError string                                       `json:"dataError"`
+	Data      []models.BalanceSheet_QuarterGrowth_Response `json:"data"`
 }
 
 type Response_CashFlow_Annual struct {
-	Error     bool                     `json:"error"`
-	DataError string                   `json:"dataError"`
-	Data      []models.CashFlow_Annual `json:"data"`
+	Error     bool                              `json:"error"`
+	DataError string                            `json:"dataError"`
+	Data      []models.CashFlow_Annual_Response `json:"data"`
 }
 type Response_CashFlow_Quarter struct {
-	Error     bool                      `json:"error"`
-	DataError string                    `json:"dataError"`
-	Data      []models.CashFlow_Quarter `json:"data"`
+	Error     bool                               `json:"error"`
+	DataError string                             `json:"dataError"`
+	Data      []models.CashFlow_Quarter_Response `json:"data"`
 }
 type Response_CashFlow_AnnualGrowth struct {
-	Error     bool                           `json:"error"`
-	DataError string                         `json:"dataError"`
-	Data      []models.CashFlow_AnnualGrowth `json:"data"`
+	Error     bool                                    `json:"error"`
+	DataError string                                  `json:"dataError"`
+	Data      []models.CashFlow_AnnualGrowth_Response `json:"data"`
 }
 type Response_CashFlow_QuarterGrowth struct {
-	Error     bool                            `json:"error"`
-	DataError string                          `json:"dataError"`
-	Data      []models.CashFlow_QuarterGrowth `json:"data"`
+	Error     bool                                     `json:"error"`
+	DataError string                                   `json:"dataError"`
+	Data      []models.CashFlow_QuarterGrowth_Response `json:"data"`
 }
 
 type Response_FinancialRatio_Annual struct {
-	Error     bool                           `json:"error"`
-	DataError string                         `json:"dataError"`
-	Data      []models.FinancialRatio_Annual `json:"data"`
+	Error     bool                                    `json:"error"`
+	DataError string                                  `json:"dataError"`
+	Data      []models.FinancialRatio_Annual_Response `json:"data"`
 }
 type Response_FinancialRatio_Quarter struct {
-	Error     bool                            `json:"error"`
-	DataError string                          `json:"dataError"`
-	Data      []models.FinancialRatio_Quarter `json:"data"`
+	Error     bool                                     `json:"error"`
+	DataError string                                   `json:"dataError"`
+	Data      []models.FinancialRatio_Quarter_Response `json:"data"`
 }
 type Response_FinancialRatio_AnnualTTM struct {
-	Error     bool                              `json:"error"`
-	DataError string                            `json:"dataError"`
-	Data      []models.FinancialRatio_AnnualTTM `json:"data"`
+	Error     bool                                       `json:"error"`
+	DataError string                                     `json:"dataError"`
+	Data      []models.FinancialRatio_AnnualTTM_Response `json:"data"`
 }
 
 type Response_KeyMetrics_Annual struct {
-	Error     bool                       `json:"error"`
-	DataError string                     `json:"dataError"`
-	Data      []models.KeyMetrics_Annual `json:"data"`
+	Error     bool                                `json:"error"`
+	DataError string                              `json:"dataError"`
+	Data      []models.KeyMetrics_Annual_Response `json:"data"`
 }
 type Response_KeyMetrics_Quarter struct {
-	Error     bool                        `json:"error"`
-	DataError string                      `json:"dataError"`
-	Data      []models.KeyMetrics_Quarter `json:"data"`
+	Error     bool                                 `json:"error"`
+	DataError string                               `json:"dataError"`
+	Data      []models.KeyMetrics_Quarter_Response `json:"data"`
 }
 type Response_KeyMetrics_CompanyTTM struct {
-	Error     bool                           `json:"error"`
-	DataError string                         `json:"dataError"`
-	Data      []models.KeyMetrics_CompanyTTM `json:"data"`
+	Error     bool                                    `json:"error"`
+	DataError string                                  `json:"dataError"`
+	Data      []models.KeyMetrics_CompanyTTM_Response `json:"data"`
 }
 type Response_TradableSymbols struct {
 	Error     bool                     `json:"error"`

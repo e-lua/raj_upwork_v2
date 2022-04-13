@@ -18,10 +18,69 @@ import (
 
 func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string) {
 
+	var get_respuesta_trad []models.TradableSymbols
+	//Trader list
+
+	source_data, error_get := http.Get("https://fmpcloud.io/api/v3/available-traded/list?apikey=" + input_data.Api_token)
+	if error_get != nil {
+		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
+	}
+	error_decode_respuesta := json.NewDecoder(source_data.Body).Decode(&get_respuesta_trad)
+	if error_decode_respuesta != nil {
+		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
+	}
+	log.Print("-------->Traded list-> extracted")
+
+	for _, val := range get_respuesta_trad {
+
+		var inco_newdata Incoming_NewData
+		inco_newdata.Symbol = val.Symbol
+		inco_newdata.Symbol = input_data.Api_token
+
+		num_code, boolerror, dataerror, errordetail := AddOneData_Service(inco_newdata)
+		if boolerror {
+			return num_code, boolerror, dataerror, errordetail
+		}
+	}
+
+	return 200, false, "", "OK"
+}
+
+func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, string, string) {
+
+	var get_respuesta_trad []models.TradableSymbols
+	//Trader list
+
+	source_data, error_get := http.Get("https://fmpcloud.io/api/v3/available-traded/list?apikey=" + input_data.Api_token)
+	if error_get != nil {
+		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
+	}
+	error_decode_respuesta := json.NewDecoder(source_data.Body).Decode(&get_respuesta_trad)
+	if error_decode_respuesta != nil {
+		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
+	}
+	log.Print("-------->Traded list-> extracted")
+
+	error_add_tr := tradableSymbols.Si_Add(get_respuesta_trad)
+	if error_add_tr != nil {
+		return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), ""
+	}
+
+	return 200, false, "", "OK"
+}
+
+func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string) {
+
 	log.Print("-------->VALIDATING IF THE DATA ALREADY EXISTS")
 	symbol, _ := all.Si_Find(input_data.Symbol)
 	if symbol != "" {
-		return 404, true, "Data already exists", ""
+
+		log.Print("-------->THIS DATA ALREADY EXISTS -STARTING EXTRACTION DATA PROCESS")
+		error_delete := all.Si_Delete(input_data.Symbol)
+		if error_delete != nil {
+			return 500, true, "Error trying to delete duplicate data", ""
+		}
+		log.Print("-------->SUCCESSFUL DELETING DATA PROCESS")
 	}
 
 	log.Print("-------->STARTING EXTRACTION DATA PROCESS")
@@ -37,20 +96,6 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_decode_respuesta_cp.Error(), ""
 	}
 	log.Print("-------->Company profile-> extracted")
-
-	var get_respuesta_trad []models.TradableSymbols
-	//Trader list
-	if input_data.WithTradedList {
-		source_data, error_get := http.Get("https://fmpcloud.io/api/v3/available-traded/list?apikey=" + input_data.Api_token)
-		if error_get != nil {
-			return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
-		}
-		error_decode_respuesta := json.NewDecoder(source_data.Body).Decode(&get_respuesta_trad)
-		if error_decode_respuesta != nil {
-			return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
-		}
-		log.Print("-------->Traded list-> extracted")
-	}
 
 	//Income Statement Annual
 	source_data_isa, error_get_isa := http.Get("https://fmpcloud.io/api/v3/income-statement/" + input_data.Symbol + "?limit=800000&apikey=" + input_data.Api_token)
@@ -269,22 +314,15 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 	log.Print("-------->Key Metrics Quarter-> extracted")
 	log.Print("-------->SUCCESSFUL EXTRACTION DATA PROCESS")
 
-	error_add := all.Si_Add(get_respuesta_companyprofile, get_respuesta_isa, get_respuesta_isq, get_respuesta_isa_isag, get_respuesta_isqg, get_respuesta_bsa, get_respuesta_bsq, get_respuesta_bsag, get_respuesta_bsqg, get_respuesta_cfa, get_respuesta_cfq, get_respuesta_cfag, get_respuesta_cfqg, get_respuesta_fra, get_respuesta_frq, get_respuesta_frattm, get_respuesta_kmcttm, get_respuesta_kma, get_respuesta_kmq)
+	error_add := all.Si_Add(input_data.Symbol, get_respuesta_companyprofile, get_respuesta_isa, get_respuesta_isq, get_respuesta_isa_isag, get_respuesta_isqg, get_respuesta_bsa, get_respuesta_bsq, get_respuesta_bsag, get_respuesta_bsqg, get_respuesta_cfa, get_respuesta_cfq, get_respuesta_cfag, get_respuesta_cfqg, get_respuesta_fra, get_respuesta_frq, get_respuesta_frattm, get_respuesta_kmcttm, get_respuesta_kma, get_respuesta_kmq)
 	if error_add != nil {
 		return 403, true, "Internal error when data load started: " + error_add.Error(), ""
-	}
-
-	if input_data.WithTradedList {
-		error_add_tr := tradableSymbols.Si_Add(get_respuesta_trad)
-		if error_add != nil {
-			return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), ""
-		}
 	}
 
 	return 201, false, "", "OK"
 }
 
-func GetIncomeStatementAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_Annual) {
+func GetIncomeStatementAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_Annual_Response) {
 
 	incomeAnnual, error_find_all := incomeStatement.Si_Find_Annual(symbol, limit_int)
 	if error_find_all != nil {
@@ -294,7 +332,7 @@ func GetIncomeStatementAnnual_Service(symbol string, limit_int int) (int, bool, 
 	return 201, false, "", incomeAnnual
 }
 
-func GetIncomeStatementQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_Quarter) {
+func GetIncomeStatementQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_Quarter_Response) {
 
 	incomeQuarter, error_find_all := incomeStatement.Si_Find_Quarter(symbol, limit_int)
 	if error_find_all != nil {
@@ -304,7 +342,7 @@ func GetIncomeStatementQuarter_Service(symbol string, limit_int int) (int, bool,
 	return 201, false, "", incomeQuarter
 }
 
-func GetIncomeStatementAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_AnnualGrowth) {
+func GetIncomeStatementAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_AnnualGrowth_Response) {
 
 	incomeAnnualGrwoth, error_find_all := incomeStatement.Si_Find_AnnualGrowth(symbol, limit_int)
 	if error_find_all != nil {
@@ -314,7 +352,7 @@ func GetIncomeStatementAnnualGrowth_Service(symbol string, limit_int int) (int, 
 	return 201, false, "", incomeAnnualGrwoth
 }
 
-func GetIncomeStatementQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_QuarterGrowth) {
+func GetIncomeStatementQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_QuarterGrowth_Response) {
 
 	incomeQuarterGrwoth, error_find_all := incomeStatement.Si_Find_QuarterGrowth(symbol, limit_int)
 	if error_find_all != nil {
@@ -324,7 +362,7 @@ func GetIncomeStatementQuarterGrowth_Service(symbol string, limit_int int) (int,
 	return 201, false, "", incomeQuarterGrwoth
 }
 
-func GetBalanceSheetAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_Annual) {
+func GetBalanceSheetAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_Annual_Response) {
 
 	balanceSheetAnnual, error_find_all := balanceSheet.Si_Find_Annual(symbol, limit_int)
 	if error_find_all != nil {
@@ -334,7 +372,7 @@ func GetBalanceSheetAnnual_Service(symbol string, limit_int int) (int, bool, str
 	return 201, false, "", balanceSheetAnnual
 }
 
-func GetBalanceSheetQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_Quarter) {
+func GetBalanceSheetQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_Quarter_Response) {
 
 	balanceSheetQuarter, error_find_all := balanceSheet.Si_Find_Quarter(symbol, limit_int)
 	if error_find_all != nil {
@@ -344,7 +382,7 @@ func GetBalanceSheetQuarter_Service(symbol string, limit_int int) (int, bool, st
 	return 201, false, "", balanceSheetQuarter
 }
 
-func GetBalanceSheetAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_AnnualGrowth) {
+func GetBalanceSheetAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_AnnualGrowth_Response) {
 
 	balanceSheetAnnualGrowth, error_find_all := balanceSheet.Si_Find_AnnualGrowth(symbol, limit_int)
 	if error_find_all != nil {
@@ -354,7 +392,7 @@ func GetBalanceSheetAnnualGrowth_Service(symbol string, limit_int int) (int, boo
 	return 201, false, "", balanceSheetAnnualGrowth
 }
 
-func GetBalanceSheetQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_QuarterGrowth) {
+func GetBalanceSheetQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_QuarterGrowth_Response) {
 
 	balanceSheetQuarterGrowth, error_find_all := balanceSheet.Si_Find_QuarterGrowth(symbol, limit_int)
 	if error_find_all != nil {
@@ -364,7 +402,7 @@ func GetBalanceSheetQuarterGrowth_Service(symbol string, limit_int int) (int, bo
 	return 201, false, "", balanceSheetQuarterGrowth
 }
 
-func GetCashFlowAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_Annual) {
+func GetCashFlowAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_Annual_Response) {
 
 	cashFlowAnnual, error_find_all := cashFlow.Si_Find_Annual(symbol, limit_int)
 	if error_find_all != nil {
@@ -374,7 +412,7 @@ func GetCashFlowAnnual_Service(symbol string, limit_int int) (int, bool, string,
 	return 201, false, "", cashFlowAnnual
 }
 
-func GetCashFlowQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_Quarter) {
+func GetCashFlowQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_Quarter_Response) {
 
 	cashFlowQuarter, error_find_all := cashFlow.Si_Find_Quarter(symbol, limit_int)
 	if error_find_all != nil {
@@ -384,7 +422,7 @@ func GetCashFlowQuarter_Service(symbol string, limit_int int) (int, bool, string
 	return 201, false, "", cashFlowQuarter
 }
 
-func GetCashFlowAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_AnnualGrowth) {
+func GetCashFlowAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_AnnualGrowth_Response) {
 
 	cashFlowAnnualGrowth, error_find_all := cashFlow.Si_Find_AnnualGrowth(symbol, limit_int)
 	if error_find_all != nil {
@@ -394,7 +432,7 @@ func GetCashFlowAnnualGrowth_Service(symbol string, limit_int int) (int, bool, s
 	return 201, false, "", cashFlowAnnualGrowth
 }
 
-func GetCashFlowQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_QuarterGrowth) {
+func GetCashFlowQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_QuarterGrowth_Response) {
 
 	cashFlowQuarterGrowth, error_find_all := cashFlow.Si_Find_QuarterGrowth(symbol, limit_int)
 	if error_find_all != nil {
@@ -404,7 +442,7 @@ func GetCashFlowQuarterGrowth_Service(symbol string, limit_int int) (int, bool, 
 	return 201, false, "", cashFlowQuarterGrowth
 }
 
-func GetFinancialRatioAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_Annual) {
+func GetFinancialRatioAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_Annual_Response) {
 
 	financialRatioAnnual, error_find_all := financialRatios.Si_Find_Annual(symbol, limit_int)
 	if error_find_all != nil {
@@ -414,7 +452,7 @@ func GetFinancialRatioAnnual_Service(symbol string, limit_int int) (int, bool, s
 	return 201, false, "", financialRatioAnnual
 }
 
-func GetFinancialRatioQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_Quarter) {
+func GetFinancialRatioQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_Quarter_Response) {
 
 	financialRatioQuarter, error_find_all := financialRatios.Si_Find_Quarter(symbol, limit_int)
 	if error_find_all != nil {
@@ -424,7 +462,7 @@ func GetFinancialRatioQuarter_Service(symbol string, limit_int int) (int, bool, 
 	return 201, false, "", financialRatioQuarter
 }
 
-func GetFinancialRatioAnnualTTM_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_AnnualTTM) {
+func GetFinancialRatioAnnualTTM_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_AnnualTTM_Response) {
 
 	financialRatioAnnualTTM, error_find_all := financialRatios.Si_Find_AnnualTTM(symbol, limit_int)
 	if error_find_all != nil {
@@ -434,7 +472,7 @@ func GetFinancialRatioAnnualTTM_Service(symbol string, limit_int int) (int, bool
 	return 201, false, "", financialRatioAnnualTTM
 }
 
-func GetKeyMetricsAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_Annual) {
+func GetKeyMetricsAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_Annual_Response) {
 
 	keymetricsAnnual, error_find_all := keyMetrics.Si_Find_Annual(symbol, limit_int)
 	if error_find_all != nil {
@@ -444,7 +482,7 @@ func GetKeyMetricsAnnual_Service(symbol string, limit_int int) (int, bool, strin
 	return 201, false, "", keymetricsAnnual
 }
 
-func GetKeyMetricsQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_Quarter) {
+func GetKeyMetricsQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_Quarter_Response) {
 
 	keymetricsQuarter, error_find_all := keyMetrics.Si_Find_Quarter(symbol, limit_int)
 	if error_find_all != nil {
@@ -454,7 +492,7 @@ func GetKeyMetricsQuarter_Service(symbol string, limit_int int) (int, bool, stri
 	return 201, false, "", keymetricsQuarter
 }
 
-func GetKeyMetricsCompanyTTM_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_CompanyTTM) {
+func GetKeyMetricsCompanyTTM_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_CompanyTTM_Response) {
 
 	keymetricsCompanyTTM, error_find_all := keyMetrics.Si_Find_companyTTM(symbol, limit_int)
 	if error_find_all != nil {

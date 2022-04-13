@@ -6,13 +6,13 @@ import (
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
-func Si_Find_Annual(symbol string, limit int) ([]models.KeyMetrics_Annual, error) {
+func Si_Find_Annual(symbol string, limit int) ([]models.KeyMetrics_Annual_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT symbol,date,period,revenuePerShare,netIncomePerShare,operatingCashFlowPerShare,freeCashFlowPerShare,cashPerShare,bookValuePerShare,tangibleBookValuePerShare,shareholdersEquityPerShare,interestDebtPerShare,marketCap,enterpriseValue,peRatio,priceToSalesRatio,pocfratio,pfcfRatio,pbRatio,ptbRatio,evToSales,enterpriseValueOverEBITDA,evToOperatingCashFlow,evToFreeCashFlow,earningsYield,freeCashFlowYield,debtToEquity,debtToAssets,netDebtToEBITDA,currentRatio,interestCoverage,incomeQuality,dividendYield,payoutRatio,salesGeneralAndAdministrativeToRevenue,researchAndDdevelopementToRevenue,intangiblesToTotalAssets,capexToOperatingCashFlow,capexToRevenue,capexToDepreciation,stockBasedCompensationToRevenue,grahamNumber,roic,returnOnTangibleAssets,grahamNetNet,workingCapital,tangibleAssetValue,netCurrentAssetValue,investedCapital,averageReceivables,averagePayables,averageInventory,daysSalesOutstanding,daysPayablesOutstanding,daysOfInventoryOnHand,receivablesTurnover,payablesTurnover,inventoryTurnover,roe,capexPerShare FROM KeyMetrics_Annual WHERE symbol=? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListKMA := []models.KeyMetrics_Annual{}
+	oListKMA := []models.KeyMetrics_Annual_Response{}
 
 	if error_show != nil {
 
@@ -20,7 +20,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.KeyMetrics_Annual, error
 	}
 
 	for rows.Next() {
-		oKMA := models.KeyMetrics_Annual{}
+		oKMA := models.KeyMetrics_Annual_Response{}
 		rows.Scan(&oKMA.Symbol,
 			&oKMA.Date,
 			&oKMA.Period,
@@ -88,13 +88,13 @@ func Si_Find_Annual(symbol string, limit int) ([]models.KeyMetrics_Annual, error
 	return oListKMA, nil
 }
 
-func Si_Find_Quarter(symbol string, limit int) ([]models.KeyMetrics_Quarter, error) {
+func Si_Find_Quarter(symbol string, limit int) ([]models.KeyMetrics_Quarter_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT symbol,date,period,revenuePerShare,netIncomePerShare,operatingCashFlowPerShare,freeCashFlowPerShare,cashPerShare,bookValuePerShare,tangibleBookValuePerShare,shareholdersEquityPerShare,interestDebtPerShare,marketCap,enterpriseValue,peRatio,priceToSalesRatio,pocfratio,pfcfRatio,pbRatio,ptbRatio,evToSales,enterpriseValueOverEBITDA,evToOperatingCashFlow,evToFreeCashFlow,earningsYield,freeCashFlowYield,debtToEquity,debtToAssets,netDebtToEBITDA,currentRatio,interestCoverage,incomeQuality,dividendYield,payoutRatio,salesGeneralAndAdministrativeToRevenue,researchAndDdevelopementToRevenue,intangiblesToTotalAssets,capexToOperatingCashFlow,capexToRevenue,capexToDepreciation,stockBasedCompensationToRevenue,grahamNumber,roic,returnOnTangibleAssets,grahamNetNet,workingCapital,tangibleAssetValue,netCurrentAssetValue,investedCapital,averageReceivables,averagePayables,averageInventory,daysSalesOutstanding,daysPayablesOutstanding,daysOfInventoryOnHand,receivablesTurnover,payablesTurnover,inventoryTurnover,roe,capexPerShare FROM KeyMetrics_Annual WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListKMQ := []models.KeyMetrics_Quarter{}
+	oListKMQ := []models.KeyMetrics_Quarter_Response{}
 
 	if error_show != nil {
 
@@ -102,7 +102,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.KeyMetrics_Quarter, err
 	}
 
 	for rows.Next() {
-		oKMQ := models.KeyMetrics_Quarter{}
+		oKMQ := models.KeyMetrics_Quarter_Response{}
 		rows.Scan(&oKMQ.Symbol,
 			&oKMQ.Date,
 			&oKMQ.Period,
@@ -170,13 +170,13 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.KeyMetrics_Quarter, err
 	return oListKMQ, nil
 }
 
-func Si_Find_companyTTM(symbol string, limit int) ([]models.KeyMetrics_CompanyTTM, error) {
+func Si_Find_companyTTM(symbol string, limit int) ([]models.KeyMetrics_CompanyTTM_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT symbol,revenuePerShareTTM,netIncomePerShareTTM,operatingCashFlowPerShareTTM,freeCashFlowPerShareTTM,cashPerShareTTM,bookValuePerShareTTM,tangibleBookValuePerShareTTM,shareholdersEquityPerShareTTM,interestDebtPerShareTTM,marketCapTTM,enterpriseValueTTM,peRatioTTM,priceToSalesRatioTTM,pocfratioTTM,pfcfRatioTTM,pbRatioTTM,ptbRatioTTM,evToSalesTTM,enterpriseValueOverEBITDATTM,evToOperatingCashFlowTTM,evToFreeCashFlowTTM,earningsYieldTTM,freeCashFlowYieldTTM,debtToEquityTTM,debtToAssetsTTM,netDebtToEBITDATTM,currentRatioTTM,interestCoverageTTM,incomeQualityTTM,dividendYieldTTM,dividendYieldPercentageTTM,payoutRatioTTM,salesGeneralAndAdministrativeToRevenueTTM,researchAndDevelopementToRevenueTTM,intangiblesToTotalAssetsTTM,capexToOperatingCashFlowTTM,capexToRevenueTTM,capexToDepreciationTTM,stockBasedCompensationToRevenueTTM,grahamNumberTTM,roicTTM,returnOnTangibleAssetsTTM,grahamNetNetTTM,workingCapitalTTM,tangibleAssetValueTTM,netCurrentAssetValueTTM,investedCapitalTTM,averageReceivablesTTM,averagePayablesTTM,averageInventoryTTM,daysSalesOutstandingTTM,daysPayablesOutstandingTTM,daysOfInventoryOnHandTTM,receivablesTurnoverTTM,payablesTurnoverTTM,inventoryTurnoverTTM,roeTTM,capexPerShareTTM,dividendPerShareTTM,debtToMarketCapTTM FROM KeyMetrics_CompanyTTM WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListKMCTTM := []models.KeyMetrics_CompanyTTM{}
+	oListKMCTTM := []models.KeyMetrics_CompanyTTM_Response{}
 
 	if error_show != nil {
 
@@ -184,7 +184,7 @@ func Si_Find_companyTTM(symbol string, limit int) ([]models.KeyMetrics_CompanyTT
 	}
 
 	for rows.Next() {
-		oKMCTTM := models.KeyMetrics_CompanyTTM{}
+		oKMCTTM := models.KeyMetrics_CompanyTTM_Response{}
 		rows.Scan(&oKMCTTM.Symbol,
 			&oKMCTTM.RevenuePerShareTTM,
 			&oKMCTTM.NetIncomePerShareTTM,

@@ -6,13 +6,13 @@ import (
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
-func Si_Find_Annual(symbol string, limit int) ([]models.IncomeStatement_Annual, error) {
+func Si_Find_Annual(symbol string, limit int) ([]models.IncomeStatement_Annual_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,revenue,costOfRevenue,grossProfit,grossProfitRatio,researchAndDevelopmentExpenses,generalAndAdministrativeExpenses,sellingAndMarketingExpenses,sellingGeneralAndAdministrativeExpenses,otherExpenses,operatingExpenses,costAndExpenses,interestIncome,interestExpense,depreciationAndAmortization,ebitda,ebitdaratio,operatingIncome,operatingIncomeRatio,totalOtherIncomeExpensesNet,incomeBeforeTax,incomeBeforeTaxRatio,incomeTaxExpense,netIncome,netIncomeRatio,eps,epsdiluted,weightedAverageShsOut,weightedAverageShsOutDil,link,finalLink FROM IncomeStatement_Annual WHERE symbol=? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListISA := []models.IncomeStatement_Annual{}
+	oListISA := []models.IncomeStatement_Annual_Response{}
 
 	if error_show != nil {
 
@@ -21,7 +21,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.IncomeStatement_Annual, 
 
 	//Scaneamos l resultado y lo asignamos a la variable instanciada
 	for rows.Next() {
-		oISA := models.IncomeStatement_Annual{}
+		oISA := models.IncomeStatement_Annual_Response{}
 		rows.Scan(&oISA.Date,
 			&oISA.Symbol,
 			&oISA.ReportedCurrency,
@@ -67,13 +67,13 @@ func Si_Find_Annual(symbol string, limit int) ([]models.IncomeStatement_Annual, 
 	return oListISA, nil
 }
 
-func Si_Find_Quarter(symbol string, limit int) ([]models.IncomeStatement_Quarter, error) {
+func Si_Find_Quarter(symbol string, limit int) ([]models.IncomeStatement_Quarter_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,revenue,costOfRevenue,grossProfit,grossProfitRatio,researchAndDevelopmentExpenses,generalAndAdministrativeExpenses,sellingAndMarketingExpenses,sellingGeneralAndAdministrativeExpenses,otherExpenses,operatingExpenses,costAndExpenses,interestIncome,interestExpense,depreciationAndAmortization,ebitda,ebitdaratio,operatingIncome,operatingIncomeRatio,totalOtherIncomeExpensesNet,incomeBeforeTax,incomeBeforeTaxRatio,incomeTaxExpense,netIncome,netIncomeRatio,eps,epsdiluted,weightedAverageShsOut,weightedAverageShsOutDil,link,finalLink FROM IncomeStatement_Quarter WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListISQ := []models.IncomeStatement_Quarter{}
+	oListISQ := []models.IncomeStatement_Quarter_Response{}
 
 	if error_show != nil {
 
@@ -82,7 +82,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.IncomeStatement_Quarter
 
 	//Scaneamos l resultado y lo asignamos a la variable instanciada
 	for rows.Next() {
-		oISQ := models.IncomeStatement_Quarter{}
+		oISQ := models.IncomeStatement_Quarter_Response{}
 		rows.Scan(&oISQ.Date,
 			&oISQ.Symbol,
 			&oISQ.ReportedCurrency,
@@ -128,13 +128,13 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.IncomeStatement_Quarter
 	return oListISQ, nil
 }
 
-func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.IncomeStatement_AnnualGrowth, error) {
+func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.IncomeStatement_AnnualGrowth_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,period,growthRevenue,growthCostOfRevenue,growthGrossProfit,growthGrossProfitRatio,growthResearchAndDevelopmentExpenses,growthGeneralAndAdministrativeExpenses,growthSellingAndMarketingExpenses,growthOtherExpenses,growthOperatingExpenses,growthCostAndExpenses,growthInterestExpense,growthDepreciationAndAmortization,growthEBITDA,growthEBITDARatio,growthOperatingIncome,growthOperatingIncomeRatio,growthTotalOtherIncomeExpensesNet,growthIncomeBeforeTax,growthIncomeBeforeTaxRatio,growthIncomeTaxExpense,growthNetIncome,growthNetIncomeRatio,growthEPS,growthEPSDiluted,growthWeightedAverageShsOut,growthWeightedAverageShsOutDil FROM IncomeStatement_AnnualGrowth WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListISAG := []models.IncomeStatement_AnnualGrowth{}
+	oListISAG := []models.IncomeStatement_AnnualGrowth_Response{}
 
 	if error_show != nil {
 
@@ -143,7 +143,7 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.IncomeStatement_An
 
 	//Scaneamos l resultado y lo asignamos a la variable instanciada
 	for rows.Next() {
-		oISAG := models.IncomeStatement_AnnualGrowth{}
+		oISAG := models.IncomeStatement_AnnualGrowth_Response{}
 		rows.Scan(&oISAG.Date,
 			&oISAG.Symbol,
 			&oISAG.Period,
@@ -180,13 +180,13 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.IncomeStatement_An
 	return oListISAG, nil
 }
 
-func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.IncomeStatement_QuarterGrowth, error) {
+func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.IncomeStatement_QuarterGrowth_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,period,growthRevenue,growthCostOfRevenue,growthGrossProfit,growthGrossProfitRatio,growthResearchAndDevelopmentExpenses,growthGeneralAndAdministrativeExpenses,growthSellingAndMarketingExpenses,growthOtherExpenses,growthOperatingExpenses,growthCostAndExpenses,growthInterestExpense,growthDepreciationAndAmortization,growthEBITDA,growthEBITDARatio,growthOperatingIncome,growthOperatingIncomeRatio,growthTotalOtherIncomeExpensesNet,growthIncomeBeforeTax,growthIncomeBeforeTaxRatio,growthIncomeTaxExpense,growthNetIncome,growthNetIncomeRatio,growthEPS,growthEPSDiluted,growthWeightedAverageShsOut,growthWeightedAverageShsOutDil FROM IncomeStatement_QuarterGrowth WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListISQG := []models.IncomeStatement_QuarterGrowth{}
+	oListISQG := []models.IncomeStatement_QuarterGrowth_Response{}
 
 	if error_show != nil {
 
@@ -195,7 +195,7 @@ func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.IncomeStatement_Q
 
 	//Scaneamos l resultado y lo asignamos a la variable instanciada
 	for rows.Next() {
-		oISQG := models.IncomeStatement_QuarterGrowth{}
+		oISQG := models.IncomeStatement_QuarterGrowth_Response{}
 		rows.Scan(&oISQG.Date,
 			&oISQG.Symbol,
 			&oISQG.Period,

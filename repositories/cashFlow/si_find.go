@@ -6,13 +6,13 @@ import (
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
-func Si_Find_Annual(symbol string, limit int) ([]models.CashFlow_Annual, error) {
+func Si_Find_Annual(symbol string, limit int) ([]models.CashFlow_Annual_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,netIncome,depreciationAndAmortization,deferredIncomeTax,stockBasedCompensation,changeInWorkingCapital,accountsReceivables,inventory,accountsPayables,otherWorkingCapital,otherNonCashItems,netCashProvidedByOperatingActivities,investmentsInPropertyPlantAndEquipment,acquisitionsNet,purchasesOfInvestments,salesMaturitiesOfInvestments,otherInvestingActivites,netCashUsedForInvestingActivites,debtRepayment,commonStockIssued,commonStockRepurchased,dividendsPaid,otherFinancingActivites,netCashUsedProvidedByFinancingActivities,effectOfForexChangesOnCash,netChangeInCash,cashAtEndOfPeriod,cashAtBeginningOfPeriod,operatingCashFlow,capitalExpenditure,freeCashFlow,link,finalLink FROM CashFlow_Annual WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListCFA := []models.CashFlow_Annual{}
+	oListCFA := []models.CashFlow_Annual_Response{}
 
 	if error_show != nil {
 
@@ -20,7 +20,7 @@ func Si_Find_Annual(symbol string, limit int) ([]models.CashFlow_Annual, error) 
 	}
 
 	for rows.Next() {
-		oCFA := models.CashFlow_Annual{}
+		oCFA := models.CashFlow_Annual_Response{}
 		rows.Scan(&oCFA.Date,
 			&oCFA.Symbol,
 			&oCFA.ReportedCurrency,
@@ -68,13 +68,13 @@ func Si_Find_Annual(symbol string, limit int) ([]models.CashFlow_Annual, error) 
 	return oListCFA, nil
 }
 
-func Si_Find_Quarter(symbol string, limit int) ([]models.CashFlow_Quarter, error) {
+func Si_Find_Quarter(symbol string, limit int) ([]models.CashFlow_Quarter_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,reportedCurrency,cik,fillingDate,acceptedDate,calendarYear,period,netIncome,depreciationAndAmortization,deferredIncomeTax,stockBasedCompensation,changeInWorkingCapital,accountsReceivables,inventory,accountsPayables,otherWorkingCapital,otherNonCashItems,netCashProvidedByOperatingActivities,investmentsInPropertyPlantAndEquipment,acquisitionsNet,purchasesOfInvestments,salesMaturitiesOfInvestments,otherInvestingActivites,netCashUsedForInvestingActivites,debtRepayment,commonStockIssued,commonStockRepurchased,dividendsPaid,otherFinancingActivites,netCashUsedProvidedByFinancingActivities,effectOfForexChangesOnCash,netChangeInCash,cashAtEndOfPeriod,cashAtBeginningOfPeriod,operatingCashFlow,capitalExpenditure,freeCashFlow,link,finalLink FROM CashFlow_Quarter WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListCFQ := []models.CashFlow_Quarter{}
+	oListCFQ := []models.CashFlow_Quarter_Response{}
 
 	if error_show != nil {
 
@@ -82,7 +82,7 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.CashFlow_Quarter, error
 	}
 
 	for rows.Next() {
-		oCFQ := models.CashFlow_Quarter{}
+		oCFQ := models.CashFlow_Quarter_Response{}
 		rows.Scan(&oCFQ.Date,
 			&oCFQ.Symbol,
 			&oCFQ.ReportedCurrency,
@@ -130,13 +130,13 @@ func Si_Find_Quarter(symbol string, limit int) ([]models.CashFlow_Quarter, error
 	return oListCFQ, nil
 }
 
-func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.CashFlow_AnnualGrowth, error) {
+func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.CashFlow_AnnualGrowth_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,period,growthNetIncome,growthDepreciationAndAmortization,growthDeferredIncomeTax,growthStockBasedCompensation,growthChangeInWorkingCapital,growthAccountsReceivables,growthInventory,growthAccountsPayables,growthOtherWorkingCapital,growthOtherNonCashItems,growthNetCashProvidedByOperatingActivites,growthInvestmentsInPropertyPlantAndEquipment,growthAcquisitionsNet,growthPurchasesOfInvestments,growthSalesMaturitiesOfInvestments,growthOtherInvestingActivites,growthNetCashUsedForInvestingActivites,growthDebtRepayment,growthCommonStockIssued,growthCommonStockRepurchased,growthDividendsPaid,growthOtherFinancingActivites,growthNetCashUsedProvidedByFinancingActivities,growthEffectOfForexChangesOnCash,growthNetChangeInCash,growthCashAtEndOfPeriod,growthCashAtBeginningOfPeriod,growthOperatingCashFlow,growthCapitalExpenditure,growthFreeCashFlow FROM CashFlow_AnnualGrowth WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListCFAG := []models.CashFlow_AnnualGrowth{}
+	oListCFAG := []models.CashFlow_AnnualGrowth_Response{}
 
 	if error_show != nil {
 
@@ -144,7 +144,7 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.CashFlow_AnnualGro
 	}
 
 	for rows.Next() {
-		oCFAG := models.CashFlow_AnnualGrowth{}
+		oCFAG := models.CashFlow_AnnualGrowth_Response{}
 		rows.Scan(&oCFAG.Date,
 			&oCFAG.Symbol,
 			&oCFAG.Period,
@@ -185,13 +185,13 @@ func Si_Find_AnnualGrowth(symbol string, limit int) ([]models.CashFlow_AnnualGro
 	return oListCFAG, nil
 }
 
-func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.CashFlow_QuarterGrowth, error) {
+func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.CashFlow_QuarterGrowth_Response, error) {
 
 	db := models.SingleStoreCN
 	q := `SELECT date,symbol,period,growthNetIncome,growthDepreciationAndAmortization,growthDeferredIncomeTax,growthStockBasedCompensation,growthChangeInWorkingCapital,growthAccountsReceivables,growthInventory,growthAccountsPayables,growthOtherWorkingCapital,growthOtherNonCashItems,growthNetCashProvidedByOperatingActivites,growthInvestmentsInPropertyPlantAndEquipment,growthAcquisitionsNet,growthPurchasesOfInvestments,growthSalesMaturitiesOfInvestments,growthOtherInvestingActivites,growthNetCashUsedForInvestingActivites,growthDebtRepayment,growthCommonStockIssued,growthCommonStockRepurchased,growthDividendsPaid,growthOtherFinancingActivites,growthNetCashUsedProvidedByFinancingActivities,growthEffectOfForexChangesOnCash,growthNetChangeInCash,growthCashAtEndOfPeriod,growthCashAtBeginningOfPeriod,growthOperatingCashFlow,growthCapitalExpenditure,growthFreeCashFlow FROM CashFlow_QuarterGrowth WHERE symbol = ? LIMIT ` + strconv.Itoa(limit)
 	rows, error_show := db.Query(q, symbol)
 
-	oListCFQG := []models.CashFlow_QuarterGrowth{}
+	oListCFQG := []models.CashFlow_QuarterGrowth_Response{}
 
 	if error_show != nil {
 
@@ -199,7 +199,7 @@ func Si_Find_QuarterGrowth(symbol string, limit int) ([]models.CashFlow_QuarterG
 	}
 
 	for rows.Next() {
-		oCFQG := models.CashFlow_QuarterGrowth{}
+		oCFQG := models.CashFlow_QuarterGrowth_Response{}
 		rows.Scan(&oCFQG.Date,
 			&oCFQG.Symbol,
 			&oCFQG.Period,

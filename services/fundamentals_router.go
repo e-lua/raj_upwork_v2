@@ -11,7 +11,7 @@ var FundamentalsRouter_pg *fundamentalsRouter_pg
 type fundamentalsRouter_pg struct {
 }
 
-func (fr *fundamentalsRouter_pg) AddAllData(c echo.Context) error {
+func (fr *fundamentalsRouter_pg) AddOneData(c echo.Context) error {
 
 	//Instanciamos una variable del modelo Business Worker
 	var incoming_newdata Incoming_NewData
@@ -25,6 +25,68 @@ func (fr *fundamentalsRouter_pg) AddAllData(c echo.Context) error {
 
 	//Validating incoming values
 	if len(incoming_newdata.Symbol) < 1 || len(incoming_newdata.Api_token) < 1 {
+		results := Response_string{Error: true, DataError: "The values entered do not comply with the business rules", Data: ""}
+		return c.JSON(400, results)
+	}
+
+	//Send data to the service
+	status, boolerror, dataerror, data := AddOneData_Service(incoming_newdata)
+
+	response := Response_string{
+		Error:     boolerror,
+		DataError: dataerror,
+		Data:      data,
+	}
+
+	//Succesfull Response
+	return c.JSON(status, response)
+}
+
+func (fr *fundamentalsRouter_pg) AddTradableSymbolList(c echo.Context) error {
+
+	//Instanciamos una variable del modelo Business Worker
+	var incoming_newdata Incoming_NewData
+
+	//Add variables from incomening request
+	err := c.Bind(&incoming_newdata)
+	if err != nil {
+		results := Response_string{Error: true, DataError: "All requested data must be sent, review the structure or values", Data: ""}
+		return c.JSON(400, results)
+	}
+
+	//Validating incoming values
+	if len(incoming_newdata.Api_token) < 1 {
+		results := Response_string{Error: true, DataError: "The values entered do not comply with the business rules", Data: ""}
+		return c.JSON(400, results)
+	}
+
+	//Send data to the service
+	status, boolerror, dataerror, data := AddTradableSymbolList_Service(incoming_newdata)
+
+	response := Response_string{
+		Error:     boolerror,
+		DataError: dataerror,
+		Data:      data,
+	}
+
+	//Succesfull Response
+	return c.JSON(status, response)
+}
+
+func (fr *fundamentalsRouter_pg) AddAllData(c echo.Context) error {
+
+	//Instanciamos una variable del modelo Business Worker
+	var incoming_newdata Incoming_NewData
+
+	//Add variables from incomening request
+	err := c.Bind(&incoming_newdata)
+	if err != nil {
+		results := Response_string{Error: true, DataError: "All requested data must be sent, review the structure or values", Data: ""}
+		return c.JSON(400, results)
+	}
+
+	//Validating incoming values
+	if len(incoming_newdata.Api_token) < 1 {
 		results := Response_string{Error: true, DataError: "The values entered do not comply with the business rules", Data: ""}
 		return c.JSON(400, results)
 	}

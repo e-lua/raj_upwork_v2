@@ -25,7 +25,9 @@ func Handlers() {
 
 	//V1->Fundamentals
 	router_fundamentals := version_1.Group("/fundamentals")
-	router_fundamentals.PUT("", service.FundamentalsRouter_pg.AddAllData)
+	router_fundamentals.PUT("/onedata", service.FundamentalsRouter_pg.AddOneData)
+	router_fundamentals.PUT("/tradablelist", service.FundamentalsRouter_pg.AddTradableSymbolList)
+	router_fundamentals.PUT("/alldata", service.FundamentalsRouter_pg.AddAllData)
 	router_fundamentals.GET("/income-statement/:symbol", service.FundamentalsRouter_pg.GetIncomeStatement)
 	router_fundamentals.GET("/income-statement-growth/:symbol", service.FundamentalsRouter_pg.GetIncomeStatementGrowth)
 	router_fundamentals.GET("/balance-sheet-statement/:symbol", service.FundamentalsRouter_pg.GetBalanceSheetStatement)
