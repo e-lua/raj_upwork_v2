@@ -64,7 +64,7 @@ func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, stri
 
 	error_add_tr, interfac_out1, interfac_out2 := tradableSymbols.Si_Add(get_respuesta_trad)
 	if error_add_tr != nil {
-		return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), "", nothing, nothing
+		return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), "", interfac_out1, interfac_out2
 	}
 
 	return 200, false, "", "OK", interfac_out1, interfac_out2
