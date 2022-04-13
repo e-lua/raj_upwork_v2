@@ -41,6 +41,15 @@ func Si_Add(ts []models.TradableSymbols) error {
 		return error_tx
 	}
 
+	//Company profile
+	q := `DELETE FROM TradableSymbols`
+	_, error_delete_cop := tx.Query(q)
+	if error_delete_cop != nil {
+		tx.Rollback()
+		return error_delete_cop
+	}
+	log.Print("DELETED TRADABLE SYMBOLS....Done")
+
 	//TradableSymbols
 	stmt_TS, _ := tx.Prepare(sqlStr_TS)
 	if _, err := stmt_TS.Exec(vals_TS...); err != nil {
@@ -54,7 +63,7 @@ func Si_Add(ts []models.TradableSymbols) error {
 		return err_commit
 	}
 
-	log.Print("LOAD INCOME STATEMENT ANNUAL....Done")
+	log.Print("LOAD TRADABLE SYMBOLS....Done")
 
 	return nil
 }
