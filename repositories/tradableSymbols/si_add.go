@@ -10,12 +10,7 @@ func Si_Add(ts []models.TradableSymbols) error {
 
 	/*-------------------DATA: TradableSymbols---------------*/
 	vals_TS := []interface{}{}
-	sqlStr_TS := `INSERT INTO TradableSymbols(
-		symbol,
-		name,
-		price,
-		exchange,
-		exchangeShortName) VALUES`
+	sqlStr_TS := `INSERT INTO TradableSymbols(symbol,name,price,exchange,exchangeShortName) VALUES`
 	counter_TS := 0
 	for _, val := range ts {
 
