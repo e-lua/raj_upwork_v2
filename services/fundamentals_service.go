@@ -327,220 +327,153 @@ func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string)
 
 func GetIncomeStatementAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_Annual_Response) {
 
-	incomeAnnual, error_find_all := incomeStatement.Si_Find_Annual(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching IncomeStatement Annual data, details: " + error_find_all.Error(), incomeAnnual
-	}
+	incomeAnnual, _ := incomeStatement.Si_Find_Annual(symbol, limit_int)
 
 	return 201, false, "", incomeAnnual
 }
 
 func GetIncomeStatementQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_Quarter_Response) {
 
-	incomeQuarter, error_find_all := incomeStatement.Si_Find_Quarter(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching IncomeStatement Quarter data, details: " + error_find_all.Error(), incomeQuarter
-	}
+	incomeQuarter, _ := incomeStatement.Si_Find_Quarter(symbol, limit_int)
 
 	return 201, false, "", incomeQuarter
 }
 
 func GetIncomeStatementAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_AnnualGrowth_Response) {
 
-	incomeAnnualGrwoth, error_find_all := incomeStatement.Si_Find_AnnualGrowth(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching IncomeStatement Annual Growth data, details: " + error_find_all.Error(), incomeAnnualGrwoth
-	}
+	incomeAnnualGrwoth, _ := incomeStatement.Si_Find_AnnualGrowth(symbol, limit_int)
 
 	return 201, false, "", incomeAnnualGrwoth
 }
 
 func GetIncomeStatementQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.IncomeStatement_QuarterGrowth_Response) {
 
-	incomeQuarterGrwoth, error_find_all := incomeStatement.Si_Find_QuarterGrowth(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching IncomeStatement Quarter Growth data, details: " + error_find_all.Error(), incomeQuarterGrwoth
-	}
+	incomeQuarterGrwoth, _ := incomeStatement.Si_Find_QuarterGrowth(symbol, limit_int)
 
 	return 201, false, "", incomeQuarterGrwoth
 }
 
 func GetBalanceSheetAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_Annual_Response) {
 
-	balanceSheetAnnual, error_find_all := balanceSheet.Si_Find_Annual(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching BalanceSheet Annual data, details: " + error_find_all.Error(), balanceSheetAnnual
-	}
+	balanceSheetAnnual, _ := balanceSheet.Si_Find_Annual(symbol, limit_int)
 
 	return 201, false, "", balanceSheetAnnual
 }
 
 func GetBalanceSheetQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_Quarter_Response) {
 
-	balanceSheetQuarter, error_find_all := balanceSheet.Si_Find_Quarter(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching BalanceSheet Quarter data, details: " + error_find_all.Error(), balanceSheetQuarter
-	}
+	balanceSheetQuarter, _ := balanceSheet.Si_Find_Quarter(symbol, limit_int)
 
 	return 201, false, "", balanceSheetQuarter
 }
 
 func GetBalanceSheetAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_AnnualGrowth_Response) {
 
-	balanceSheetAnnualGrowth, error_find_all := balanceSheet.Si_Find_AnnualGrowth(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching BalanceSheet Annual Growth data, details: " + error_find_all.Error(), balanceSheetAnnualGrowth
-	}
+	balanceSheetAnnualGrowth, _ := balanceSheet.Si_Find_AnnualGrowth(symbol, limit_int)
 
 	return 201, false, "", balanceSheetAnnualGrowth
 }
 
 func GetBalanceSheetQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.BalanceSheet_QuarterGrowth_Response) {
 
-	balanceSheetQuarterGrowth, error_find_all := balanceSheet.Si_Find_QuarterGrowth(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching BalanceSheet Quarter Growth data, details: " + error_find_all.Error(), balanceSheetQuarterGrowth
-	}
+	balanceSheetQuarterGrowth, _ := balanceSheet.Si_Find_QuarterGrowth(symbol, limit_int)
 
 	return 201, false, "", balanceSheetQuarterGrowth
 }
 
 func GetCashFlowAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_Annual_Response) {
 
-	cashFlowAnnual, error_find_all := cashFlow.Si_Find_Annual(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching CashFlow Annual data, details: " + error_find_all.Error(), cashFlowAnnual
-	}
+	cashFlowAnnual, _ := cashFlow.Si_Find_Annual(symbol, limit_int)
 
 	return 201, false, "", cashFlowAnnual
 }
 
 func GetCashFlowQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_Quarter_Response) {
 
-	cashFlowQuarter, error_find_all := cashFlow.Si_Find_Quarter(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching CashFlow Quarter data, details: " + error_find_all.Error(), cashFlowQuarter
-	}
+	cashFlowQuarter, _ := cashFlow.Si_Find_Quarter(symbol, limit_int)
 
 	return 201, false, "", cashFlowQuarter
 }
 
 func GetCashFlowAnnualGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_AnnualGrowth_Response) {
 
-	cashFlowAnnualGrowth, error_find_all := cashFlow.Si_Find_AnnualGrowth(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching CashFlow Annual Growth data, details: " + error_find_all.Error(), cashFlowAnnualGrowth
-	}
+	cashFlowAnnualGrowth, _ := cashFlow.Si_Find_AnnualGrowth(symbol, limit_int)
 
 	return 201, false, "", cashFlowAnnualGrowth
 }
 
 func GetCashFlowQuarterGrowth_Service(symbol string, limit_int int) (int, bool, string, []models.CashFlow_QuarterGrowth_Response) {
 
-	cashFlowQuarterGrowth, error_find_all := cashFlow.Si_Find_QuarterGrowth(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching CashFlow Quarter Growth data, details: " + error_find_all.Error(), cashFlowQuarterGrowth
-	}
+	cashFlowQuarterGrowth, _ := cashFlow.Si_Find_QuarterGrowth(symbol, limit_int)
 
 	return 201, false, "", cashFlowQuarterGrowth
 }
 
 func GetFinancialRatioAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_Annual_Response) {
 
-	financialRatioAnnual, error_find_all := financialRatios.Si_Find_Annual(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching FinancialRatio Annual data, details: " + error_find_all.Error(), financialRatioAnnual
-	}
+	financialRatioAnnual, _ := financialRatios.Si_Find_Annual(symbol, limit_int)
 
 	return 201, false, "", financialRatioAnnual
 }
 
 func GetFinancialRatioQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_Quarter_Response) {
 
-	financialRatioQuarter, error_find_all := financialRatios.Si_Find_Quarter(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching FinancialRatio Quarter data, details: " + error_find_all.Error(), financialRatioQuarter
-	}
+	financialRatioQuarter, _ := financialRatios.Si_Find_Quarter(symbol, limit_int)
 
 	return 201, false, "", financialRatioQuarter
 }
 
 func GetFinancialRatioAnnualTTM_Service(symbol string, limit_int int) (int, bool, string, []models.FinancialRatio_AnnualTTM_Response) {
 
-	financialRatioAnnualTTM, error_find_all := financialRatios.Si_Find_AnnualTTM(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching FinancialRatio Annual TTM data, details: " + error_find_all.Error(), financialRatioAnnualTTM
-	}
+	financialRatioAnnualTTM, _ := financialRatios.Si_Find_AnnualTTM(symbol, limit_int)
 
 	return 201, false, "", financialRatioAnnualTTM
 }
 
 func GetKeyMetricsAnnual_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_Annual_Response) {
 
-	keymetricsAnnual, error_find_all := keyMetrics.Si_Find_Annual(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching KeyMetrics Annual data, details: " + error_find_all.Error(), keymetricsAnnual
-	}
+	keymetricsAnnual, _ := keyMetrics.Si_Find_Annual(symbol, limit_int)
 
 	return 201, false, "", keymetricsAnnual
 }
 
 func GetKeyMetricsQuarter_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_Quarter_Response) {
 
-	keymetricsQuarter, error_find_all := keyMetrics.Si_Find_Quarter(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching KeyMetrics Quarter data, details: " + error_find_all.Error(), keymetricsQuarter
-	}
+	keymetricsQuarter, _ := keyMetrics.Si_Find_Quarter(symbol, limit_int)
 
 	return 201, false, "", keymetricsQuarter
 }
 
 func GetKeyMetricsCompanyTTM_Service(symbol string, limit_int int) (int, bool, string, []models.KeyMetrics_CompanyTTM_Response) {
 
-	keymetricsCompanyTTM, error_find_all := keyMetrics.Si_Find_companyTTM(symbol, limit_int)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching KeyMetrics Company TTM data, details: " + error_find_all.Error(), keymetricsCompanyTTM
-	}
+	keymetricsCompanyTTM, _ := keyMetrics.Si_Find_companyTTM(symbol, limit_int)
 
 	return 201, false, "", keymetricsCompanyTTM
 }
 
 func GetAvailableTraded_Service() (int, bool, string, []models.TradableSymbols) {
 
-	tradableSymbols, error_find_all := tradableSymbols.Si_Find()
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching Tradable Symbols data, details: " + error_find_all.Error(), tradableSymbols
-	}
-
+	tradableSymbols, _ := tradableSymbols.Si_Find()
 	return 201, false, "", tradableSymbols
 }
 
 func GetCompanyProfile_Service(symbols string) (int, bool, string, models.CompanyProfile) {
 
-	profile, error_find_all := profile.Si_Find_Profile(symbols)
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching Profile data, details: " + error_find_all.Error(), profile
-	}
+	profile, _ := profile.Si_Find_Profile(symbols)
 
 	return 201, false, "", profile
 }
 
 func GetIndustries_Service() (int, bool, string, []string) {
 
-	industries, error_find_all := all.Si_Find_Industries()
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching Industries, details: " + error_find_all.Error(), industries
-	}
+	industries, _ := all.Si_Find_Industries()
 
 	return 201, false, "", industries
 }
 
 func GetSectors_Service() (int, bool, string, []string) {
 
-	sectors, error_find_all := all.Si_Find_Sectors()
-	if error_find_all != nil {
-		return 403, true, "Internal error when searching Sectors, details: " + error_find_all.Error(), sectors
-	}
+	sectors, _ := all.Si_Find_Sectors()
 
 	return 201, false, "", sectors
 }
