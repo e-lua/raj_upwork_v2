@@ -80,7 +80,6 @@ func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string)
 		if error_delete != nil {
 			return 500, true, "Error trying to delete duplicate data", ""
 		}
-		log.Print("-------->SUCCESSFUL DELETING DATA PROCESS")
 	}
 
 	log.Print("-------->STARTING EXTRACTION DATA PROCESS")
