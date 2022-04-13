@@ -16,7 +16,7 @@ func Si_Delete(symbol string) error {
 	}
 
 	//Company profile
-	q_cop := `DELETE FROM CompanyProfile2 WHERE symbol=?`
+	q_cop := `DELETE FROM CompanyProfile WHERE symbol=?`
 	_, error_delete_cop := tx.Query(q_cop, symbol)
 	if error_delete_cop != nil {
 		tx.Rollback()
