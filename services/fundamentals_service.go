@@ -63,10 +63,23 @@ func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, stri
 	}
 	log.Print("-------->Traded list-> extracted")
 
-	error_add_tr := tradableSymbols.Si_Add(get_respuesta_trad)
-	if error_add_tr != nil {
-		return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), ""
+	counter := 0
+
+	for _, val := range get_respuesta_trad {
+
+		if len(val.Symbol) <= 0 {
+			break
+		}
+		counter = counter + 1
+
 	}
+
+	log.Println("Total quantity ", counter)
+	/*
+		error_add_tr := tradableSymbols.Si_Add(get_respuesta_trad)
+		if error_add_tr != nil {
+			return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), ""
+		}*/
 
 	return 200, false, "", "OK"
 }
