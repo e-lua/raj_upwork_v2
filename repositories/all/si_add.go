@@ -1994,7 +1994,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	/*---------------------------------------------------------------*/
 
 	/*-------------------DATA: CompanyProfile---------------*/
-	/*vals_CP := []interface{}{}
+	vals_CP := []interface{}{}
 	sqlStr_CP := `INSERT INTO CompanyProfile(
 	symbol,
 	price,
@@ -2078,7 +2078,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		counter_CP = counter_CP + 1
 	}
 	//Deleting the last nil value
-	sqlStr_CP = sqlStr_CP[0 : len(sqlStr_CP)-1]*/
+	sqlStr_CP = sqlStr_CP[0 : len(sqlStr_CP)-1]
 	/*---------------------------------------------------------------*/
 
 	//BEGIN
@@ -2089,11 +2089,11 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	}
 
 	//TradableSymbols
-	/*stmt_CP, _ := tx.Prepare(sqlStr_CP)
+	stmt_CP, _ := tx.Prepare(sqlStr_CP)
 	if _, err := stmt_CP.Exec(vals_CP...); err != nil {
 		return err
 	}
-	log.Print("LOAD COMPANY PROFILE....Done")*/
+	log.Print("LOAD COMPANY PROFILE....Done")
 
 	//Income Statement Annual
 	stmt_ISA, _ := tx.Prepare(sqlStr_ISA)

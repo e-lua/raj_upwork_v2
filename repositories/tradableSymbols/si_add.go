@@ -15,7 +15,7 @@ func Si_Add(ts []models.TradableSymbols) error {
 		name,
 		price,
 		exchange,
-		exchangeShortName) VALUES `
+		exchangeShortName) VALUES`
 
 	for _, val := range ts {
 
