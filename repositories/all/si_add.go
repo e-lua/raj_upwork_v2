@@ -9,6 +9,26 @@ import (
 
 func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatement_Annual, isq []models.IncomeStatement_Quarter, isag []models.IncomeStatement_AnnualGrowth, isqg []models.IncomeStatement_QuarterGrowth, bsa []models.BalanceSheet_Annual, bsq []models.BalanceSheet_Quarter, bsag []models.BalanceSheet_AnnualGrowth, bsqg []models.BalanceSheet_QuarterGrowth, cfa []models.CashFlow_Annual, cfq []models.CashFlow_Quarter, cfag []models.CashFlow_AnnualGrowth, cfqg []models.CashFlow_QuarterGrowth, fra []models.FinancialRatio_Annual, frq []models.FinancialRatio_Quarter, frattm []models.FinancialRatio_AnnualTTM, kmcttm []models.KeyMetrics_CompanyTTM, kma []models.KeyMetrics_Annual, kmq []models.KeyMetrics_Quarter) error {
 
+	counter_BalanceSheet_Annual := 0
+	counter_BalanceSheet_AnnualGrowth := 0
+	counter_BalanceSheet_Quarter := 0
+	counter_BalanceSheet_QuarterGrowth := 0
+	counter_CashFlow_Annual := 0
+	counter_CashFlow_AnnualGrowth := 0
+	counter_CashFlow_Quarter := 0
+	counter_CashFlow_QuarterGrowth := 0
+	counter_FinancialRatio_Annual := 0
+	counter_FinancialRatio_AnnualTTM := 0
+	counter_FinancialRatio_Quarter := 0
+	counter_IncomeStatement_Annual := 0
+	counter_IncomeStatement_AnnualGrowth := 0
+	counter_IncomeStatement_Quarter := 0
+	counter_IncomeStatement_QuarterGrowth := 0
+	counter_CompanyProfile := 0
+	counter_KeyMetrics_Annual := 0
+	counter_KeyMetrics_Quarter := 0
+	counter_KeyMetrics_CompanyTTM := 0
+
 	/*-------------------DATA: IncomeStatement Annual---------------*/
 	vals_ISA := []interface{}{}
 	sqlStr_ISA := `INSERT INTO IncomeStatement_Annual(
@@ -53,7 +73,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		finalLink) VALUES`
 	counter_ISA := 0
 	for _, val := range isa {
-
+		counter_IncomeStatement_Annual = counter_IncomeStatement_Annual + 1
 		//Insert data in the query
 		sqlStr_ISA += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -146,7 +166,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		finalLink) VALUES`
 	counter_ISQ := 0
 	for _, val := range isq {
-
+		counter_IncomeStatement_Quarter = counter_IncomeStatement_Quarter + 1
 		//Insert data in the query
 		sqlStr_ISQ += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -230,7 +250,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		growthWeightedAverageShsOutDil) VALUES`
 	counter_ISAG := 0
 	for _, val := range isag {
-
+		counter_IncomeStatement_AnnualGrowth = counter_IncomeStatement_AnnualGrowth + 1
 		//Insert data in the query
 		sqlStr_ISAG += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -306,7 +326,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 		growthWeightedAverageShsOutDil) VALUES`
 	counter_ISQG := 0
 	for _, val := range isag {
-
+		counter_IncomeStatement_QuarterGrowth = counter_IncomeStatement_QuarterGrowth + 1
 		//Insert data in the query
 		sqlStr_ISQG += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -408,7 +428,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_BSA := 0
 	for _, val := range bsa {
-
+		counter_BalanceSheet_Annual += counter_BalanceSheet_Annual + 1
 		//Insert data in the query
 		sqlStr_BSA += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -535,7 +555,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_BSQ := 0
 	for _, val := range bsq {
-
+		counter_BalanceSheet_Quarter = counter_BalanceSheet_Quarter + 1
 		//Insert data in the query
 		sqlStr_BSQ += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -650,7 +670,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_BSAG := 0
 	for _, val := range bsag {
-
+		counter_BalanceSheet_AnnualGrowth = counter_BalanceSheet_AnnualGrowth + 1
 		//Insert data in the query
 		sqlStr_BSAG += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -753,7 +773,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_BSQG := 0
 	for _, val := range bsqg {
-
+		counter_BalanceSheet_QuarterGrowth = counter_BalanceSheet_QuarterGrowth + 1
 		//Insert data in the query
 		sqlStr_BSQG += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -854,7 +874,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_CFA := 0
 	for _, val := range cfa {
-
+		counter_CashFlow_Annual = counter_CashFlow_Annual + 1
 		//Insert data in the query
 		sqlStr_CFA += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -953,7 +973,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_CFQ := 0
 	for _, val := range cfq {
-
+		counter_CashFlow_Quarter = counter_CashFlow_Quarter + 1
 		//Insert data in the query
 		sqlStr_CFQ += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -1045,7 +1065,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_CFAG := 0
 	for _, val := range cfag {
-
+		counter_CashFlow_AnnualGrowth = counter_CashFlow_AnnualGrowth + 1
 		//Insert data in the query
 		sqlStr_CFAG += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -1130,7 +1150,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_CFQG := 0
 	for _, val := range cfqg {
-
+		counter_CashFlow_QuarterGrowth = counter_CashFlow_QuarterGrowth + 1
 		//Insert data in the query
 		sqlStr_CFQG += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -1238,7 +1258,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_FRA := 0
 	for _, val := range fra {
-
+		counter_FinancialRatio_Annual = counter_FinancialRatio_Annual + 1
 		//Insert data in the query
 		sqlStr_FRA += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -1369,7 +1389,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_FRQ := 0
 	for _, val := range frq {
-
+		counter_FinancialRatio_Quarter = counter_FinancialRatio_Quarter + 1
 		//Insert data in the query
 		sqlStr_FRQ += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -1503,7 +1523,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_FRATTM := 0
 	for _, val := range frattm {
-
+		counter_FinancialRatio_AnnualTTM = counter_FinancialRatio_AnnualTTM + 1
 		//Insert data in the query
 		sqlStr_FRATTM += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -1641,7 +1661,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_KMA := 0
 	for _, val := range kma {
-
+		counter_KeyMetrics_Annual = counter_KeyMetrics_Annual + 1
 		//Insert data in the query
 		sqlStr_KMA += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -1780,7 +1800,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_KMQ := 0
 	for _, val := range kmq {
-
+		counter_KeyMetrics_Quarter = counter_KeyMetrics_Quarter + 1
 		//Insert data in the query
 		sqlStr_KMQ += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -1920,7 +1940,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	) VALUES`
 	counter_KMCTTM := 0
 	for _, val := range kmcttm {
-
+		counter_KeyMetrics_CompanyTTM = counter_KeyMetrics_CompanyTTM + 1
 		//Insert data in the query
 		sqlStr_KMCTTM += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -2034,7 +2054,7 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	isFund) VALUES`
 	counter_CP := 0
 	for _, val := range cp {
-
+		counter_CompanyProfile = counter_CompanyProfile + 1
 		//Insert data in the query
 		sqlStr_CP += "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),"
 		//Assign the data to the query
@@ -2097,150 +2117,185 @@ func Si_Add(symbol string, cp []models.CompanyProfile, isa []models.IncomeStatem
 	}
 	log.Print("LOAD COMPANY PROFILE....Done")
 
-	//Income Statement Annual
-	stmt_ISA, _ := tx.Prepare(sqlStr_ISA)
-	if _, err := stmt_ISA.Exec(vals_ISA...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_IncomeStatement_Annual > 0 {
+		//Income Statement Annual
+		stmt_ISA, _ := tx.Prepare(sqlStr_ISA)
+		if _, err := stmt_ISA.Exec(vals_ISA...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD INCOME STATEMENT ANNUAL....Done")
 	}
-	log.Print("LOAD INCOME STATEMENT ANNUAL....Done")
 
-	//Income Statement Quarter
-	stmt_ISQ, _ := tx.Prepare(sqlStr_ISQ)
-	if _, err := stmt_ISQ.Exec(vals_ISQ...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_IncomeStatement_Quarter > 0 {
+		//Income Statement Quarter
+		stmt_ISQ, _ := tx.Prepare(sqlStr_ISQ)
+		if _, err := stmt_ISQ.Exec(vals_ISQ...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD INCOME STATEMENT QUARTER....Done")
 	}
-	log.Print("LOAD INCOME STATEMENT QUARTER....Done")
 
-	//Income Statement Annual Growth
-	stmt_ISAG, _ := tx.Prepare(sqlStr_ISAG)
-	if _, err := stmt_ISAG.Exec(vals_ISAG...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_IncomeStatement_AnnualGrowth > 0 {
+		//Income Statement Annual Growth
+		stmt_ISAG, _ := tx.Prepare(sqlStr_ISAG)
+		if _, err := stmt_ISAG.Exec(vals_ISAG...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD INCOME STATEMENT ANNUAL GROWTH....Done")
 	}
-	log.Print("LOAD INCOME STATEMENT ANNUAL GROWTH....Done")
 
-	//Income Statement Quarter Growth
-	stmt_ISQG, _ := tx.Prepare(sqlStr_ISQG)
-	if _, err := stmt_ISQG.Exec(vals_ISQG...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_IncomeStatement_QuarterGrowth > 0 {
+		//Income Statement Quarter Growth
+		stmt_ISQG, _ := tx.Prepare(sqlStr_ISQG)
+		if _, err := stmt_ISQG.Exec(vals_ISQG...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD INCOME STATEMENT QUARTER GROWTH....Done")
 	}
-	log.Print("LOAD INCOME STATEMENT QUARTER GROWTH....Done")
 
-	//Balance Sheet Annual
-	stmt_BSA, _ := tx.Prepare(sqlStr_BSA)
-	if _, err := stmt_BSA.Exec(vals_BSA...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_BalanceSheet_Annual > 0 {
+		//Balance Sheet Annual
+		stmt_BSA, _ := tx.Prepare(sqlStr_BSA)
+		if _, err := stmt_BSA.Exec(vals_BSA...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD BALANCE SHEET ANNUAL....Done")
 	}
-	log.Print("LOAD BALANCE SHEET ANNUAL....Done")
 
-	//Balance Sheet Quarter
-	stmt_BSQ, _ := tx.Prepare(sqlStr_BSQ)
-	if _, err := stmt_BSQ.Exec(vals_BSQ...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_BalanceSheet_Quarter > 0 {
+		//Balance Sheet Quarter
+		stmt_BSQ, _ := tx.Prepare(sqlStr_BSQ)
+		if _, err := stmt_BSQ.Exec(vals_BSQ...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD BALANCE SHEET QUARTER....Done")
 	}
-	log.Print("LOAD BALANCE SHEET QUARTER....Done")
 
-	//Balance Sheet Annual Growth
-	stmt_BSAG, _ := tx.Prepare(sqlStr_BSAG)
-	if _, err := stmt_BSAG.Exec(vals_BSAG...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_IncomeStatement_AnnualGrowth > 0 {
+		//Balance Sheet Annual Growth
+		stmt_BSAG, _ := tx.Prepare(sqlStr_BSAG)
+		if _, err := stmt_BSAG.Exec(vals_BSAG...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD BALANCE SHEET ANNUAL GROWTH....Done")
 	}
-	log.Print("LOAD BALANCE SHEET ANNUAL GROWTH....Done")
 
-	//Balance Sheet Quarter Growth
-	stmt_BSQG, _ := tx.Prepare(sqlStr_BSQG)
-	if _, err := stmt_BSQG.Exec(vals_BSQG...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_BalanceSheet_QuarterGrowth > 0 {
+		//Balance Sheet Quarter Growth
+		stmt_BSQG, _ := tx.Prepare(sqlStr_BSQG)
+		if _, err := stmt_BSQG.Exec(vals_BSQG...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD BALANCE SHEET QUARTER GROWTH....Done")
 	}
-	log.Print("LOAD BALANCE SHEET QUARTER GROWTH....Done")
 
-	//CashFlow Annual
-	stmt_CFA, _ := tx.Prepare(sqlStr_CFA)
-	if _, err := stmt_CFA.Exec(vals_CFA...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_CashFlow_Annual > 0 {
+		//CashFlow Annual
+		stmt_CFA, _ := tx.Prepare(sqlStr_CFA)
+		if _, err := stmt_CFA.Exec(vals_CFA...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD CASHFLOW ANNUAL....Done")
 	}
-	log.Print("LOAD CASHFLOW ANNUAL....Done")
 
-	//CashFlow Quarter
-	stmt_CFQ, _ := tx.Prepare(sqlStr_CFQ)
-	if _, err := stmt_CFQ.Exec(vals_CFQ...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_CashFlow_Quarter > 0 {
+		//CashFlow Quarter
+		stmt_CFQ, _ := tx.Prepare(sqlStr_CFQ)
+		if _, err := stmt_CFQ.Exec(vals_CFQ...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD CASHFLOW QUARTER....Done")
 	}
-	log.Print("LOAD CASHFLOW QUARTER....Done")
 
-	//CashFlow Annual Growth
-	stmt_CFAG, _ := tx.Prepare(sqlStr_CFAG)
-	if _, err := stmt_CFAG.Exec(vals_CFAG...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_CashFlow_AnnualGrowth > 0 {
+		//CashFlow Annual Growth
+		stmt_CFAG, _ := tx.Prepare(sqlStr_CFAG)
+		if _, err := stmt_CFAG.Exec(vals_CFAG...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD CASHFLOW ANNUAL GROWTH....Done")
 	}
-	log.Print("LOAD CASHFLOW ANNUAL GROWTH....Done")
 
-	//CashFlow Quarter Growth
-	stmt_CFQG, _ := tx.Prepare(sqlStr_CFQG)
-	if _, err := stmt_CFQG.Exec(vals_CFQG...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_CashFlow_QuarterGrowth > 0 {
+		//CashFlow Quarter Growth
+		stmt_CFQG, _ := tx.Prepare(sqlStr_CFQG)
+		if _, err := stmt_CFQG.Exec(vals_CFQG...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD CASHFLOW QUARTER GROWTH....Done")
 	}
-	log.Print("LOAD CASHFLOW QUARTER GROWTH....Done")
 
-	//Financial Ratio Annual
-	stmt_FRA, _ := tx.Prepare(sqlStr_FRA)
-	if _, err := stmt_FRA.Exec(vals_FRA...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_FinancialRatio_Annual > 0 {
+		//Financial Ratio Annual
+		stmt_FRA, _ := tx.Prepare(sqlStr_FRA)
+		if _, err := stmt_FRA.Exec(vals_FRA...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD FINANCIAL RATIO ANNUAL....Done")
 	}
-	log.Print("LOAD FINANCIAL RATIO ANNUAL....Done")
 
-	//Financial Ratio Quarter
-	stmt_FRQ, _ := tx.Prepare(sqlStr_FRQ)
-	if _, err := stmt_FRQ.Exec(vals_FRQ...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_FinancialRatio_Quarter > 0 {
+		//Financial Ratio Quarter
+		stmt_FRQ, _ := tx.Prepare(sqlStr_FRQ)
+		if _, err := stmt_FRQ.Exec(vals_FRQ...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD FINANCIAL RATIO QUARTER....Done")
 	}
-	log.Print("LOAD FINANCIAL RATIO QUARTER....Done")
 
-	//Financial Ratio Annual TTM
-	stmt_FRATTM, _ := tx.Prepare(sqlStr_FRATTM)
-	if _, err := stmt_FRATTM.Exec(vals_FRATTM...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_FinancialRatio_AnnualTTM > 0 {
+		//Financial Ratio Annual TTM
+		stmt_FRATTM, _ := tx.Prepare(sqlStr_FRATTM)
+		if _, err := stmt_FRATTM.Exec(vals_FRATTM...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD FINANCIAL RATIO ANNUAL TTM....Done")
 	}
-	log.Print("LOAD FINANCIAL RATIO ANNUAL TTM....Done")
 
-	//Key Metrics Annual
-	stmt_KMA, _ := tx.Prepare(sqlStr_KMA)
-	if _, err := stmt_KMA.Exec(vals_KMA...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_KeyMetrics_Annual > 0 {
+		//Key Metrics Annual
+		stmt_KMA, _ := tx.Prepare(sqlStr_KMA)
+		if _, err := stmt_KMA.Exec(vals_KMA...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD KEY METRICS ANNUAL....Done")
 	}
-	log.Print("LOAD KEY METRICS ANNUAL....Done")
 
-	//Key Metrics Quarter
-	stmt_KMQ, _ := tx.Prepare(sqlStr_KMQ)
-	if _, err := stmt_KMQ.Exec(vals_KMQ...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_KeyMetrics_Quarter > 0 {
+		//Key Metrics Quarter
+		stmt_KMQ, _ := tx.Prepare(sqlStr_KMQ)
+		if _, err := stmt_KMQ.Exec(vals_KMQ...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD KEY METRICS QUARTER....Done")
 	}
-	log.Print("LOAD KEY METRICS QUARTER....Done")
 
-	//Key Metrics Company TTM
-	stmt_KMCTTM, _ := tx.Prepare(sqlStr_KMCTTM)
-	if _, err := stmt_KMCTTM.Exec(vals_KMCTTM...); err != nil {
-		tx.Rollback()
-		return err
+	if counter_KeyMetrics_CompanyTTM > 0 {
+		//Key Metrics Company TTM
+		stmt_KMCTTM, _ := tx.Prepare(sqlStr_KMCTTM)
+		if _, err := stmt_KMCTTM.Exec(vals_KMCTTM...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		log.Print("LOAD KEY METRICS COMPANY TTM....Done")
 	}
-	log.Print("LOAD KEY METRICS COMPANY TTM....Done")
-
 	//TERMINAMOS LA TRANSACCION
 	err_commit := tx.Commit()
 	if err_commit != nil {
