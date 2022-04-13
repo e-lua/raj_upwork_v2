@@ -27,6 +27,11 @@ func Si_Add(ts []models.TradableSymbols) error {
 			val.Price,
 			val.Exchange,
 			val.ExchangeShortName)
+
+		if counter_TS > 60000 {
+			break
+		}
+
 		//Sum counter
 		counter_TS = counter_TS + 1
 	}
