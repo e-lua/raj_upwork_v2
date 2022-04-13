@@ -21,7 +21,7 @@ func Si_Add(ts []models.TradableSymbols) (error, interface{}, interface{}) {
 	for _, val := range ts {
 
 		//Insert data in the query
-		sqlStr_TS += "(?,?,?,?,?),"
+		sqlStr_TS += "(?,?,?,?,?,?),"
 		//Assign the data to the query
 		vals_TS = append(vals_TS, time.Now().UnixMilli()+int64(counter_TS), val.Symbol,
 			val.Name,
