@@ -46,27 +46,28 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 	return 200, false, "", "OK"
 }
 
-func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, string, interface{}) {
+func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, string, interface{}, interface{}, interface{}) {
 
 	var get_respuesta_trad []models.TradableSymbols
 	//Trader list
+	nothing := "nothing"
 
 	source_data, error_get := http.Get("https://fmpcloud.io/api/v3/available-traded/list?apikey=" + input_data.Api_token)
 	if error_get != nil {
-		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
+		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), "", nothing, nothing
 	}
 	error_decode_respuesta := json.NewDecoder(source_data.Body).Decode(&get_respuesta_trad)
 	if error_decode_respuesta != nil {
-		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
+		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), "", nothing, nothing
 	}
 	log.Print("-------->Traded list-> extracted")
 
-	error_add_tr := tradableSymbols.Si_Add(get_respuesta_trad)
+	error_add_tr, interfac_out1, interfac_out2 := tradableSymbols.Si_Add(get_respuesta_trad)
 	if error_add_tr != nil {
-		return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), ""
+		return 403, true, "Internal error when Tradable List data load started: " + error_add_tr.Error(), "", nothing, nothing
 	}
 
-	return 200, false, "", "OK"
+	return 200, false, "", "OK", interfac_out1, interfac_out2
 }
 
 func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string) {

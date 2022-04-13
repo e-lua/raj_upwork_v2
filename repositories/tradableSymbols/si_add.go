@@ -7,7 +7,7 @@ import (
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
-func Si_Add(ts []models.TradableSymbols) error {
+func Si_Add(ts []models.TradableSymbols) (error, interface{}, interface{}) {
 
 	/*-------------------DATA: TradableSymbols---------------*/
 	vals_TS := []interface{}{}
@@ -29,36 +29,37 @@ func Si_Add(ts []models.TradableSymbols) error {
 			val.Exchange,
 			val.ExchangeShortName)
 
-		if counter_TS > 100 {
+		if counter_TS > 3 {
 			break
 		}
 		//Sum counter
 		counter_TS = counter_TS + 1
 	}
-
+	//Deleting the last nil value
+	sqlStr_TS = sqlStr_TS[0 : len(sqlStr_TS)-1]
 	/*---------------------------------------------------------------*/
 
 	//BEGIN
 	tx, error_tx := models.SingleStoreCN.Begin()
 	if error_tx != nil {
 		tx.Rollback()
-		return error_tx
+		return error_tx, sqlStr_TS, vals_TS
 	}
 
 	//TradableSymbols
 	stmt_TS, _ := tx.Prepare(sqlStr_TS)
 	if _, err := stmt_TS.Exec(vals_TS...); err != nil {
-		return err
+		return err, sqlStr_TS, vals_TS
 	}
 
 	//TERMINAMOS LA TRANSACCION
 	err_commit := tx.Commit()
 	if err_commit != nil {
 		tx.Rollback()
-		return err_commit
+		return err_commit, sqlStr_TS, vals_TS
 	}
 
 	log.Print("LOAD INCOME STATEMENT ANNUAL....Done")
 
-	return nil
+	return nil, sqlStr_TS, vals_TS
 }
