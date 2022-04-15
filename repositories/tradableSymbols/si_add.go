@@ -10,15 +10,15 @@ func Si_Add(ts []models.TradableSymbols_Income) error {
 
 	/*-------------------DATA: TradableSymbols---------------*/
 	vals_TS := []interface{}{}
-	sqlStr_TS := `INSERT INTO TradableSymbols(symbol) VALUES`
+	sqlStr_TS := `INSERT INTO TradableSymbols(id,symbol) VALUES`
 	counter_TS := 0
 	for _, val := range ts {
 
-		if val.ExchangeShortName == "AMEX" || val.ExchangeShortName == "NASDQ" || val.ExchangeShortName == "NYSE" || val.ExchangeShortName == "ETF" {
+		if val.ExchangeShortName == "AMEX" || val.ExchangeShortName == "NASDAQ" || val.ExchangeShortName == "NYSE" || val.ExchangeShortName == "ETF" {
 			//Insert data in the query
-			sqlStr_TS += "(?),"
+			sqlStr_TS += "(?,?),"
 			//Assign the data to the query
-			vals_TS = append(vals_TS, val.Symbol)
+			vals_TS = append(vals_TS, counter_TS, val.Symbol)
 
 			//Sum counter
 			counter_TS = counter_TS + 1
