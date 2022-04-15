@@ -1,6 +1,7 @@
 package available_traded
 
 import (
+	"log"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -106,8 +107,8 @@ func (fr *fundamentalsRouter_pg) AddAllData(c echo.Context) error {
 
 func (fr *fundamentalsRouter_pg) GetIncomeStatement(c echo.Context) error {
 
-	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
+	log.Println(symbol)
 	//Validating incoming values
 	if len(symbol) < 1 {
 		results := Response_IncomenStatement_Annual{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
@@ -140,7 +141,6 @@ func (fr *fundamentalsRouter_pg) GetIncomeStatement(c echo.Context) error {
 
 func (fr *fundamentalsRouter_pg) GetIncomeStatementGrowth(c echo.Context) error {
 
-	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
 	//Validating incoming values
 	if len(symbol) < 1 {
@@ -173,7 +173,6 @@ func (fr *fundamentalsRouter_pg) GetIncomeStatementGrowth(c echo.Context) error 
 
 func (fr *fundamentalsRouter_pg) GetBalanceSheetStatement(c echo.Context) error {
 
-	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
 	//Validating incoming values
 	if len(symbol) < 1 {
@@ -206,7 +205,6 @@ func (fr *fundamentalsRouter_pg) GetBalanceSheetStatement(c echo.Context) error 
 
 func (fr *fundamentalsRouter_pg) GetBalanceSheetStatementGrowth(c echo.Context) error {
 
-	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
 	//Validating incoming values
 	if len(symbol) < 1 {
