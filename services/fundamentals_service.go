@@ -53,7 +53,7 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 
 func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, string, string) {
 
-	var get_respuesta_trad []models.TradableSymbols
+	var get_respuesta_trad []models.TradableSymbols_Income
 
 	source_data, error_get := http.Get("https://fmpcloud.io/api/v3/available-traded/list?apikey=" + input_data.Api_token)
 	if error_get != nil {

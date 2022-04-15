@@ -6,7 +6,7 @@ import (
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 )
 
-func Si_Add(ts []models.TradableSymbols) error {
+func Si_Add(ts []models.TradableSymbols_Income) error {
 
 	/*-------------------DATA: TradableSymbols---------------*/
 	vals_TS := []interface{}{}
