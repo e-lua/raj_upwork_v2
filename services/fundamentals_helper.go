@@ -135,6 +135,15 @@ type Incoming_NewData struct {
 	Api_token      string `json:"api_token"`
 	WithTradedList bool   `json:"with_tradedlist"`
 }
+
+type Incoming_NewData_ToUploadAllData struct {
+	Symbol    string `json:"symbol"`
+	Api_token string `json:"api_token"`
+	Limit     int    `json:"limit"`
+	Index     int    `json:"index"`
+	Offset    int    `json:"offset"`
+}
+
 type Incoming_Request struct {
 	Code          string `json:"code"`
 	Currency_code string `json:"currency_code"`

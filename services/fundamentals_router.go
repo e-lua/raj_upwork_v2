@@ -76,7 +76,7 @@ func (fr *fundamentalsRouter_pg) AddTradableSymbolList(c echo.Context) error {
 func (fr *fundamentalsRouter_pg) AddAllData(c echo.Context) error {
 
 	//Instanciamos una variable del modelo Business Worker
-	var incoming_newdata Incoming_NewData
+	var incoming_newdata Incoming_NewData_ToUploadAllData
 
 	//Add variables from incomening request
 	err := c.Bind(&incoming_newdata)

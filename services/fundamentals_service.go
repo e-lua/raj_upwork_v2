@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 	all "github.com/Aphofisis/raj_upwork_v2/repositories/all"
@@ -16,20 +17,11 @@ import (
 	tradableSymbols "github.com/Aphofisis/raj_upwork_v2/repositories/tradableSymbols"
 )
 
-func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string) {
+func AddAllData_Service(input_data Incoming_NewData_ToUploadAllData) (int, bool, string, string) {
 
-	var get_respuesta_trad []models.TradableSymbols
-	//Trader list
+	log.Println("===================================== " + strconv.Itoa(input_data.Index) + " =====================================")
 
-	source_data, error_get := http.Get("https://fmpcloud.io/api/v3/available-traded/list?apikey=" + input_data.Api_token)
-	if error_get != nil {
-		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
-	}
-	error_decode_respuesta := json.NewDecoder(source_data.Body).Decode(&get_respuesta_trad)
-	if error_decode_respuesta != nil {
-		return 403, true, "Internal error at the moment to get the data from TradableSymbols, details: " + error_get.Error(), ""
-	}
-	log.Print("-------->Traded list-> extracted")
+	get_respuesta_trad, _ := tradableSymbols.Si_Find_WithLimit(input_data.Limit, input_data.Index, input_data.Offset)
 
 	counter := 0
 	for _, val := range get_respuesta_trad {
@@ -38,7 +30,7 @@ func AddAllData_Service(input_data Incoming_NewData) (int, bool, string, string)
 		inco_newdata.Symbol = val.Symbol
 		inco_newdata.Api_token = input_data.Api_token
 
-		log.Println(val.Symbol, input_data.Api_token)
+		log.Println("--->>SYMBOL TO CHARGE: " + val.Symbol)
 
 		_, boolerror, dataerror, _ := AddOneData_Service(inco_newdata)
 		if boolerror {
