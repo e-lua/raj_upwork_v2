@@ -14,13 +14,15 @@ func Si_Add(ts []models.TradableSymbols) error {
 	counter_TS := 0
 	for _, val := range ts {
 
-		//Insert data in the query
-		sqlStr_TS += "(?),"
-		//Assign the data to the query
-		vals_TS = append(vals_TS, val.Symbol)
+		if val.ExchangeShortName == "AMEX" || val.ExchangeShortName == "NASDQ" || val.ExchangeShortName == "NYSE" || val.ExchangeShortName == "ETF" {
+			//Insert data in the query
+			sqlStr_TS += "(?),"
+			//Assign the data to the query
+			vals_TS = append(vals_TS, val.Symbol)
 
-		//Sum counter
-		counter_TS = counter_TS + 1
+			//Sum counter
+			counter_TS = counter_TS + 1
+		}
 	}
 
 	log.Println("TOTAL INSERTED ", counter_TS)
