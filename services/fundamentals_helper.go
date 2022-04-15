@@ -139,9 +139,7 @@ type Incoming_NewData struct {
 type Incoming_NewData_ToUploadAllData struct {
 	Symbol    string `json:"symbol"`
 	Api_token string `json:"api_token"`
-	Limit     int    `json:"limit"`
 	Index     int    `json:"index"`
-	Offset    int    `json:"offset"`
 }
 
 type Incoming_Request struct {

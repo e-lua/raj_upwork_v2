@@ -29,10 +29,10 @@ func Si_Find() ([]models.TradableSymbols, error) {
 	return oListTS, nil
 }
 
-func Si_Find_WithLimit(limit int, index int, offset int) ([]models.TradableSymbols, error) {
+func Si_Find_WithLimit(index int) ([]models.TradableSymbols, error) {
 
 	db := models.SingleStoreCN
-	q := `SELECT symbol FROM TradableSymbols ORDER BY symbol ASC LIMIT ` + strconv.Itoa(limit*index) + "," + strconv.Itoa(offset)
+	q := `SELECT symbol FROM TradableSymbols ORDER BY symbol ASC LIMIT ` + strconv.Itoa(10*index) + "," + strconv.Itoa(10)
 	rows, error_show := db.Query(q)
 
 	oListTS := []models.TradableSymbols{}

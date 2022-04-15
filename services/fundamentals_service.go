@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	models "github.com/Aphofisis/raj_upwork_v2/models"
 	all "github.com/Aphofisis/raj_upwork_v2/repositories/all"
@@ -19,25 +20,35 @@ import (
 
 func AddAllData_Service(input_data Incoming_NewData_ToUploadAllData) (int, bool, string, string) {
 
-	log.Println("===================================== " + strconv.Itoa(input_data.Index) + " =====================================")
+	output_index := input_data.Index
 
-	get_respuesta_trad, _ := tradableSymbols.Si_Find_WithLimit(input_data.Limit, input_data.Index, input_data.Offset)
+	for {
 
-	counter := 0
-	for _, val := range get_respuesta_trad {
+		log.Println("===================================== " + strconv.Itoa(output_index) + " =====================================")
+		get_respuesta_trad, _ := tradableSymbols.Si_Find_WithLimit(output_index)
+		counter := 0
+		for _, val := range get_respuesta_trad {
 
-		var inco_newdata Incoming_NewData
-		inco_newdata.Symbol = val.Symbol
-		inco_newdata.Api_token = input_data.Api_token
+			var inco_newdata Incoming_NewData
+			inco_newdata.Symbol = val.Symbol
+			inco_newdata.Api_token = input_data.Api_token
 
-		log.Println("--->>SYMBOL TO CHARGE: " + val.Symbol)
+			log.Println("--->>SYMBOL TO CHARGE: " + val.Symbol)
 
-		_, boolerror, dataerror, _ := AddOneData_Service(inco_newdata)
-		if boolerror {
-			log.Println(val.Symbol, "result ? ", dataerror)
+			_, boolerror, dataerror, _ := AddOneData_Service(inco_newdata)
+			if boolerror {
+				log.Println(val.Symbol, "result ? ", dataerror)
+			}
+
+			counter = counter + 1
 		}
 
-		counter = counter + 1
+		if output_index == 1048 {
+			break
+		}
+
+		output_index = output_index + 1
+		time.Sleep(3 * time.Minute)
 	}
 
 	return 200, false, "", "OK"
