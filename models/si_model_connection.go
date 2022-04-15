@@ -17,10 +17,10 @@ var (
 func Conectar_Si_DB() *sql.DB {
 
 	// TODO: read from config
-	HOSTNAME := "svc-67e316db-38ba-4a61-821b-cb5e53b4324c-ddl.aws-oregon-2.svc.singlestore.com"
+	HOSTNAME := "svc-d24221ca-add5-4726-807c-41c60cf39ecc-ddl.aws-virginia-2.svc.singlestore.com"
 	PORT := "3306"
 	USERNAME := "admin"
-	PASSWORD := "wdfsdf3123ga..FF"
+	PASSWORD := "d^<#|)ElJgab,$l=lBot"
 	DATABASE := "TickerDatabase"
 
 	once_pg.Do(func() {
