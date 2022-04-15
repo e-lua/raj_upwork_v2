@@ -1,7 +1,6 @@
 package available_traded
 
 import (
-	"log"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -108,12 +107,6 @@ func (fr *fundamentalsRouter_pg) AddAllData(c echo.Context) error {
 func (fr *fundamentalsRouter_pg) GetIncomeStatement(c echo.Context) error {
 
 	symbol := c.Param("symbol")
-	log.Println(symbol)
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_IncomenStatement_Annual{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	period := c.Request().URL.Query().Get("period")
@@ -142,11 +135,6 @@ func (fr *fundamentalsRouter_pg) GetIncomeStatement(c echo.Context) error {
 func (fr *fundamentalsRouter_pg) GetIncomeStatementGrowth(c echo.Context) error {
 
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_IncomenStatement_AnnualGrowth{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	period := c.Request().URL.Query().Get("period")
@@ -174,11 +162,6 @@ func (fr *fundamentalsRouter_pg) GetIncomeStatementGrowth(c echo.Context) error 
 func (fr *fundamentalsRouter_pg) GetBalanceSheetStatement(c echo.Context) error {
 
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_BalanceSheet_Annual{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	period := c.Request().URL.Query().Get("period")
@@ -206,11 +189,6 @@ func (fr *fundamentalsRouter_pg) GetBalanceSheetStatement(c echo.Context) error 
 func (fr *fundamentalsRouter_pg) GetBalanceSheetStatementGrowth(c echo.Context) error {
 
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_BalanceSheet_AnnualGrowth{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	period := c.Request().URL.Query().Get("period")
@@ -239,11 +217,6 @@ func (fr *fundamentalsRouter_pg) GetCashFlow(c echo.Context) error {
 
 	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_CashFlow_Annual{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	period := c.Request().URL.Query().Get("period")
@@ -272,11 +245,6 @@ func (fr *fundamentalsRouter_pg) GetCashFlowGrowth(c echo.Context) error {
 
 	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_CashFlow_AnnualGrowth{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	period := c.Request().URL.Query().Get("period")
@@ -305,11 +273,6 @@ func (fr *fundamentalsRouter_pg) GetRatios(c echo.Context) error {
 
 	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_FinancialRatio_Annual{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	period := c.Request().URL.Query().Get("period")
@@ -338,11 +301,6 @@ func (fr *fundamentalsRouter_pg) GetRatiosTTM(c echo.Context) error {
 
 	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_FinancialRatio_AnnualTTM{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	limit := c.Request().URL.Query().Get("limit")
@@ -362,11 +320,6 @@ func (fr *fundamentalsRouter_pg) GetKeyMetrics(c echo.Context) error {
 
 	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_KeyMetrics_Annual{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	period := c.Request().URL.Query().Get("period")
@@ -395,11 +348,6 @@ func (fr *fundamentalsRouter_pg) GetKeyMetricsTTM(c echo.Context) error {
 
 	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_KeyMetrics_CompanyTTM{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	//Recibimos el limit
 	limit := c.Request().URL.Query().Get("limit")
@@ -426,11 +374,6 @@ func (fr *fundamentalsRouter_pg) GetCompanyProfile(c echo.Context) error {
 
 	//Recibimos la fecha de la carta
 	symbol := c.Param("symbol")
-	//Validating incoming values
-	if len(symbol) < 1 {
-		results := Response_KeyMetrics_CompanyTTM{Error: true, DataError: "The values entered do not comply with the business rules", Data: nil}
-		return c.JSON(400, results)
-	}
 
 	status, boolerror, dataerror, data := GetCompanyProfile_Service(symbol)
 	results := Response_CompanyProfile{Error: boolerror, DataError: dataerror, Data: data}
