@@ -40,6 +40,8 @@ func AddAllData_Service(input_data Incoming_NewData_ToUploadAllData) (int, bool,
 				log.Println(val.Symbol, "result ? ", dataerror)
 			}
 
+			time.Sleep(10 * time.Second)
+
 			counter = counter + 1
 		}
 
@@ -48,7 +50,7 @@ func AddAllData_Service(input_data Incoming_NewData_ToUploadAllData) (int, bool,
 		}
 
 		output_index = output_index + 1
-		time.Sleep(3 * time.Minute)
+		time.Sleep(2 * time.Minute)
 	}
 
 	return 200, false, "", "OK"
@@ -107,10 +109,12 @@ func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string)
 	source_data_isa, error_get_isa := http.Get("https://fmpcloud.io/api/v3/income-statement/" + input_data.Symbol + "?limit=800000&apikey=" + input_data.Api_token)
 	var get_respuesta_isa []models.IncomeStatement_Annual
 	if error_get_isa != nil {
+		log.Println(source_data_isa)
 		return 403, true, "Internal error at the moment to get the data from Income Statement Annual, details: " + error_get_isa.Error(), ""
 	}
 	error_decode_respuesta_isa := json.NewDecoder(source_data_isa.Body).Decode(&get_respuesta_isa)
 	if error_decode_respuesta_isa != nil {
+		log.Println(source_data_isa)
 		return 403, true, "Internal error at the moment to get the data from Income Statement Annual, details: " + error_decode_respuesta_isa.Error(), ""
 	}
 	log.Print("-------->Income Statement Annual-> extracted")
@@ -119,10 +123,12 @@ func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string)
 	source_data_isq, error_get_isq := http.Get("https://fmpcloud.io/api/v3/income-statement/" + input_data.Symbol + "?period=quarter&limit=800000&apikey=" + input_data.Api_token)
 	var get_respuesta_isq []models.IncomeStatement_Quarter
 	if error_get_isq != nil {
+		log.Println(source_data_isq)
 		return 403, true, "Internal error at the moment to get the data from Income Statement Quarter, details: " + error_get_isq.Error(), ""
 	}
 	error_decode_respuesta := json.NewDecoder(source_data_isq.Body).Decode(&get_respuesta_isq)
 	if error_decode_respuesta != nil {
+		log.Println(source_data_isq)
 		return 403, true, "Internal error at the moment to get the data from Income Statement Quarter, details: " + error_get_isq.Error(), ""
 	}
 	log.Print("-------->Income Statement Quarter-> extracted")
