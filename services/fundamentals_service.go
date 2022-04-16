@@ -18,6 +18,7 @@ import (
 	tradableSymbols "github.com/Aphofisis/raj_upwork_v2/repositories/tradableSymbols"
 )
 
+//AddAllData_Service add the data for each symbol
 func AddAllData_Service(input_data Incoming_NewData_ToUploadAllData) (int, bool, string, string) {
 
 	output_index := input_data.Index
@@ -33,7 +34,7 @@ func AddAllData_Service(input_data Incoming_NewData_ToUploadAllData) (int, bool,
 			inco_newdata.Symbol = val.Symbol
 			inco_newdata.Api_token = input_data.Api_token
 
-			log.Println("--->>>>>>>>SYMBOL TO CHARGE: " + val.Symbol + " " + strconv.Itoa(input_data.Index) + "." + strconv.Itoa(counter))
+			log.Println("--->>>>>>>>SYMBOL TO CHARGE: " + val.Symbol + " " + strconv.Itoa(output_index) + "." + strconv.Itoa(counter))
 
 			_, boolerror, dataerror, _ := AddOneData_Service(inco_newdata)
 			if boolerror {
@@ -57,6 +58,7 @@ func AddAllData_Service(input_data Incoming_NewData_ToUploadAllData) (int, bool,
 	return 200, false, "", "OK"
 }
 
+//AddTradableSymbolList_Service add the tradable symbols
 func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, string, string) {
 
 	var get_respuesta_trad []models.TradableSymbols_Income
@@ -79,6 +81,7 @@ func AddTradableSymbolList_Service(input_data Incoming_NewData) (int, bool, stri
 	return 200, false, "", "OK"
 }
 
+//AddOneData_Service add the data just for one symbol
 func AddOneData_Service(input_data Incoming_NewData) (int, bool, string, string) {
 
 	log.Print("-------->VALIDATING IF THE DATA ALREADY EXISTS")
