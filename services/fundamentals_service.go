@@ -52,7 +52,7 @@ func AddAllData_Service(input_data Incoming_NewData_ToUploadAllData) (int, bool,
 		}
 
 		output_index = output_index + 1
-		time.Sleep(1 * time.Minute)
+		time.Sleep(2 * time.Minute)
 	}
 
 	return 200, false, "", "OK"
